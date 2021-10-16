@@ -2,34 +2,29 @@
 
 <h1>Category</h1>
 <main>
-    <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+
+    <a class="nav-link  btn btn-outline-success fas fa-plus " asp-area="" asp-controller="Categories" asp-action="Create"> Add new one category</a>
     <br>
-
-    <a class="nav-link  btn btn-outline-success col-1" asp-area="" asp-controller="Categories" asp-action="Create">Create</a>
-
     <br>
     <table class="table">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">ID</th>
+
                 <th scope="col">Category</th>
                 <th scope="col">Description</th>
-                <th scope="col">Button</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <th scope="row">@item.Id</th>
+
                     <td>@item.Name</td>
                     <td>@item.Description</td>
                     <td>
-                        @Html.ActionLink("Delete", "Delete", "Categories", new { Id = item.Id }, new { @class = "btn btn-danger" })
-                        @Html.ActionLink("Edit", "Edit", "Categories", new { id = item.Id }, new { @class = "btn btn-success" })
+                        @Html.ActionLink(" Delete", "Delete", "Categories", new { Id = item.Id }, new { @class = "btn btn-outline-danger fas fa-trash-alt" })
+                        @Html.ActionLink(" Edit", "Edit", "Categories", new { id = item.Id }, new { @class = "btn btn-outline-info 	fas fa-edit" })
                         @* @Html.ActionLink("Details", "Details", "Todos", new { id = item.Id }, new { @class = "btn btn-info" }) *@
                     </td>
                 </tr>
