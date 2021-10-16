@@ -1,0 +1,21 @@
+﻿@model AppDevGCD0805.Models.Course
+
+
+
+<h1>Edit</h1>
+<form asp-controller="Courses" asp-action="Edit" method="post">
+
+    <div class="form-group">
+        <label>Name of Course</label>
+        <input type="text" class="form-control" placeholder="Input name" asp-for="Name">
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <input type="text" class="form-control" placeholder="Description input" asp-for="Description">
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <input type="text" class="form-control" placeholder="Description input" asp-for="CategoryId">
+    </div>
+    <button type="submit" class="btn btn-outline-success">Edit</button>
+</form>
