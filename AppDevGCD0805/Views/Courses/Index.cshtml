@@ -8,11 +8,11 @@
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
+    <br >
+    <a class="nav-link  btn btn-outline-success fas fa-plus " asp-area="" asp-controller="Courses" asp-action="Create"> Add new one course</a>
+    <br>
     <br>
 
-    <a class="nav-link  btn btn-outline-success col-1" asp-area="" asp-controller="Courses" asp-action="Create">Create</a>
-
-    <br>
     <table class="table">
         <thead class="thead-dark">
             <tr>
@@ -27,13 +27,13 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <th scope="row">@item.Name</th>
+                    <td>@item.Name</td>
                     <td>@item.Description</td>
                     <td>@item.Category.Name</td>
 
                     <td>
-                        @Html.ActionLink("Delete", "Delete", "Courses", new { Id = item.Id }, new { @class = "btn btn-outline-danger" })
-                        @Html.ActionLink("Edit", "Edit", "Courses", new { id = item.Id }, new { @class = "btn btn-outline-info" })
+                        @Html.ActionLink(" Delete", "Delete", "Categories", new { Id = item.Id }, new { @class = "btn btn-outline-danger fas fa-trash-alt" })
+                        @Html.ActionLink(" Edit", "Edit", "Categories", new { id = item.Id }, new { @class = "btn btn-outline-info 	fas fa-edit" })
                         @* @Html.ActionLink("Details", "Details", "Todos", new { id = item.Id }, new { @class = "btn btn-info" }) *@
                     </td>
                 </tr>
