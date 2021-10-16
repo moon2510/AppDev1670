@@ -1,5 +1,20 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model AppDevGCD0805.Models.Course
+
+
+
+<h1>CreateCourse</h1>
+<form asp-controller="Courses" asp-action="Create" method="post">
+    <div class="form-group">
+        <label>Name of course</label>
+        <input type="text" class="form-control" placeholder="Input name" asp-for="Name">
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <input type="text" class="form-control" placeholder="Description input" asp-for="Description">
+    </div>
+    <div class="form-group">
+        <label>CategoryId</label>
+        <input type="text" class="form-control" placeholder="CategoryId input" asp-for="CategoryId">
+    </div>
+    <button type="submit" class="btn btn-outline-success">Create</button>
+</form>
