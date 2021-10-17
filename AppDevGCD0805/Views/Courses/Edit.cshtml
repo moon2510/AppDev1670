@@ -13,9 +13,13 @@
         <label>Description</label>
         <input type="text" class="form-control" placeholder="Description input" asp-for="Description">
     </div>
+   
     <div class="form-group">
-        <label>Description</label>
-        <input type="text" class="form-control" placeholder="Description input" asp-for="CategoryId">
+      <label>CategoryId</label>
+
+      @Html.DropDownListFor(model => model.CategoryId, ViewBag.CategoryList as SelectList,
+                "Select Category", new { @class = "form-control" })
+
     </div>
     <button type="submit" class="btn btn-outline-success">Edit</button>
 </form>

@@ -3,6 +3,7 @@ using System.Linq;
 using AppDevGCD0805.Data;
 using AppDevGCD0805.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace AppDevGCD0805.Controllers
@@ -27,9 +28,16 @@ namespace AppDevGCD0805.Controllers
 
         public IActionResult Create()
         {
-            var model = _db.Categories.ToList();
-            ViewBag.name = model;
-            return View(ViewBag.name);
+         //var model = _db.Categories.ToList();
+         //ViewBag.name = model;
+            var model = new Course();
+            var cate = _db.Categories.ToList();
+            var categoryList = _db.Categories.Select(x => new { x.Id, x.Name }).ToList();
+            
+            ViewBag.CategoryList = new SelectList(categoryList,"Id","Name");
+
+
+            return View(model);
         }
 
 
@@ -39,6 +47,7 @@ namespace AppDevGCD0805.Controllers
 
             _db.Courses.Add(course);
             _db.SaveChanges();
+
 
             return RedirectToAction("Index");
         }
@@ -58,11 +67,19 @@ namespace AppDevGCD0805.Controllers
         public ActionResult Edit(int id)
         {
 
-            var todoInDb = _db.Courses
-                .SingleOrDefault(t => t.Id == id);
+         var todoInDb = _db.Courses
+           .SingleOrDefault(t => t.Id == id);
 
-            return View(todoInDb);
-        }
+         
+         var model = new Course();
+         var cate = _db.Categories.ToList();
+         var categoryList = _db.Categories.Select(x => new { x.Id, x.Name }).ToList();
+
+         ViewBag.CategoryList = new SelectList(categoryList, "Id", "Name");
+
+   
+         return View(todoInDb);
+      }
 
         [HttpPost]
         public ActionResult Edit(Course course)

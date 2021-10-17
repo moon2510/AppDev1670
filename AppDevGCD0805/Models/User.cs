@@ -11,6 +11,7 @@ namespace AppDevGCD0805.Models
 		public string FullName { get; set; }
 		public int Age { get; set; }
 
+
 		
 	}
 }

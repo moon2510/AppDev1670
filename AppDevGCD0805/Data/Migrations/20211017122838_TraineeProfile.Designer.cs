@@ -4,35 +4,22 @@ using AppDevGCD0805.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AppDevGCD0805.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211017122838_TraineeProfile")]
+    partial class TraineeProfile
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("AppDevGCD0805.Models.AssignTraineeCourse", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "CourseId");
-
-                    b.HasIndex("CourseId");
-
-                    b.ToTable("AssignTraineeCourses");
-                });
 
             modelBuilder.Entity("AppDevGCD0805.Models.AssignTrainerCourse", b =>
                 {
@@ -325,25 +312,6 @@ namespace AppDevGCD0805.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("AppDevGCD0805.Models.AssignTraineeCourse", b =>
-                {
-                    b.HasOne("AppDevGCD0805.Models.Course", "Course")
-                        .WithMany("AssignTraineeCourses")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AppDevGCD0805.Models.TraineeProfile", "TraineeProfile")
-                        .WithMany("AssignTraineeCourses")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("TraineeProfile");
-                });
-
             modelBuilder.Entity("AppDevGCD0805.Models.AssignTrainerCourse", b =>
                 {
                     b.HasOne("AppDevGCD0805.Models.Course", "Course")
@@ -454,14 +422,7 @@ namespace AppDevGCD0805.Data.Migrations
 
             modelBuilder.Entity("AppDevGCD0805.Models.Course", b =>
                 {
-                    b.Navigation("AssignTraineeCourses");
-
                     b.Navigation("AssignTrainerCourses");
-                });
-
-            modelBuilder.Entity("AppDevGCD0805.Models.TraineeProfile", b =>
-                {
-                    b.Navigation("AssignTraineeCourses");
                 });
 
             modelBuilder.Entity("AppDevGCD0805.Models.TrainerProfile", b =>

@@ -1,4 +1,5 @@
-﻿using AppDevGCD0805.Models;
+﻿using AppDevGCD0805.Data.Configurations;
+using AppDevGCD0805.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,8 +18,17 @@ namespace AppDevGCD0805.Data
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			base.OnModelCreating(builder);
+			builder.ApplyConfiguration(new TrainerCourseConfigurations());
+			builder.ApplyConfiguration(new TraineeCourseConfigurations());
 		}
 		public DbSet<Category> Categories { get; set; }
 		public DbSet<Course> Courses { get; set; }
+
+		public DbSet<TrainerProfile> TrainerProfiles { get; set; }
+		public DbSet<AssignTrainerCourse> AssignTrainerCourses { get; set; }
+
+		public DbSet<TraineeProfile> TraineeProfiles { get; set; }
+
+		public DbSet<AssignTrainerCourse> AssignTraineeCourses { get; set; }
 	}
 }
