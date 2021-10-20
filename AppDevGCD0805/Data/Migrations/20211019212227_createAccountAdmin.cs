@@ -1,0 +1,83 @@
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+
+namespace AppDevGCD0805.Data.Migrations
+{
+    public partial class createAccountAdmin : Migration
+    {
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "2741778b-ebe6-4eda-a410-a29e79117a7e", "aa518e65-833d-406b-8c97-a299c61baa61", "Admin", "ADMIN" },
+                    { "f422ddf5-4b35-4280-a9c1-8455c34c9ca3", "38b5f4c8-e23b-4bc0-8f14-cb32434ea2a8", "Staff", "STAFF" },
+                    { "18b891b5-e12a-430e-bad0-47f62c820cbc", "c6e1a026-5f53-4985-9677-8859da50a45d", "Trainer", "TRAINER" },
+                    { "f37717ed-3abe-4e88-9566-814d0bccd28f", "6cf3e930-8572-47e4-8684-69ce0a141424", "Trainee", "TRAINEE" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "Address", "Age", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "e48d61de-1aad-409a-b816-0fbcafb0b828", 0, null, 0, "ce43bb37-babd-42d7-9708-9c4344eff756", "admin@gmail.com", true, "Le Trung Kien", false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEFU+BcbXj4BJL4gv9Z3yziZH4ba3fzF1nSTwL7XaLjgICzLMTyWaGmsItllyJLUsbg==", null, true, "9e24c652-8a43-4101-862d-98869a25f507", false, "admin" },
+                    { "99a0d65f-e071-4e3f-9dfb-b51651c6f148", 0, null, 0, "75a4202c-3e6a-485d-ad7a-149fdafa18ab", "staff@gmail.com", true, "Le Tran Thai Tuan", false, null, null, null, "AQAAAAEAACcQAAAAEOI+HnfgNV8H/wKzCdwTHjCPpwLDnaXfhHMsjofYUMdMdiWyWPXV6n2IqbJpfTAL7w==", null, true, "f471c990-0edc-4d10-844e-091abc0b36ba", false, "staff" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "2741778b-ebe6-4eda-a410-a29e79117a7e", "e48d61de-1aad-409a-b816-0fbcafb0b828" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "f422ddf5-4b35-4280-a9c1-8455c34c9ca3", "99a0d65f-e071-4e3f-9dfb-b51651c6f148" });
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DeleteData(
+                table: "AspNetRoles",
+                keyColumn: "Id",
+                keyValue: "18b891b5-e12a-430e-bad0-47f62c820cbc");
+
+            migrationBuilder.DeleteData(
+                table: "AspNetRoles",
+                keyColumn: "Id",
+                keyValue: "f37717ed-3abe-4e88-9566-814d0bccd28f");
+
+            migrationBuilder.DeleteData(
+                table: "AspNetUserRoles",
+                keyColumns: new[] { "RoleId", "UserId" },
+                keyValues: new object[] { "f422ddf5-4b35-4280-a9c1-8455c34c9ca3", "99a0d65f-e071-4e3f-9dfb-b51651c6f148" });
+
+            migrationBuilder.DeleteData(
+                table: "AspNetUserRoles",
+                keyColumns: new[] { "RoleId", "UserId" },
+                keyValues: new object[] { "2741778b-ebe6-4eda-a410-a29e79117a7e", "e48d61de-1aad-409a-b816-0fbcafb0b828" });
+
+            migrationBuilder.DeleteData(
+                table: "AspNetRoles",
+                keyColumn: "Id",
+                keyValue: "2741778b-ebe6-4eda-a410-a29e79117a7e");
+
+            migrationBuilder.DeleteData(
+                table: "AspNetRoles",
+                keyColumn: "Id",
+                keyValue: "f422ddf5-4b35-4280-a9c1-8455c34c9ca3");
+
+            migrationBuilder.DeleteData(
+                table: "AspNetUsers",
+                keyColumn: "Id",
+                keyValue: "99a0d65f-e071-4e3f-9dfb-b51651c6f148");
+
+            migrationBuilder.DeleteData(
+                table: "AspNetUsers",
+                keyColumn: "Id",
+                keyValue: "e48d61de-1aad-409a-b816-0fbcafb0b828");
+        }
+    }
+}

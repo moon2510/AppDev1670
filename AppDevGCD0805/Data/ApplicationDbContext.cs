@@ -1,4 +1,5 @@
 ﻿using AppDevGCD0805.Data.Configurations;
+using AppDevGCD0805.Data.SeedData;
 using AppDevGCD0805.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ namespace AppDevGCD0805.Data
 			base.OnModelCreating(builder);
 			builder.ApplyConfiguration(new TrainerCourseConfigurations());
 			builder.ApplyConfiguration(new TraineeCourseConfigurations());
+			UserSeed.Seed(builder);
 		}
 		public DbSet<Category> Categories { get; set; }
 		public DbSet<Course> Courses { get; set; }
