@@ -49,22 +49,22 @@ namespace AppDevGCD0805.Data.SeedData
             var hasher = new PasswordHasher<User>();
             var admin = new User()
             {
-                UserName = "admin",
+                UserName = "admin@gmail.com",
                 NormalizedUserName = "ADMIN",
                 FullName = "Le Trung Kien",
                 Email = "admin@gmail.com",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
-                PasswordHash = hasher.HashPassword(null, "admin@123"),
+                PasswordHash = hasher.HashPassword(null, "Admin@123"),
             };
             var staff = new User()
             {
-                UserName = "staff",
+                UserName = "staff@gmail.com",
                 FullName = "Le Tran Thai Tuan",
                 Email = "staff@gmail.com",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
-                PasswordHash = hasher.HashPassword(null, "staff@123"),
+                PasswordHash = hasher.HashPassword(null, "Staff@123"),
             };
             builder.Entity<User>().HasData(
                 admin,
