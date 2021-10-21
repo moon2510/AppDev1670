@@ -21,13 +21,14 @@ namespace AppDevGCD0805.Controllers
             _db = db;
             _userManager = userManager;
             _roleManager = roleManager;
+
         }
         public IActionResult Index()
         {
             return View();
         }
 
-        
+        //Action Staff
         public IActionResult CreateStaff()
         {
             User model = new User();
@@ -36,25 +37,77 @@ namespace AppDevGCD0805.Controllers
         [HttpPost]
         public IActionResult CreateStaff(User user)
         {
-            IdentityResult result = _userManager.CreateAsync(user, "defaultStaff@123").GetAwaiter().GetResult();
+            IdentityResult result = _userManager.CreateAsync(user, "Staff@123").GetAwaiter().GetResult();
             IdentityResult roleReulst = _userManager.AddToRoleAsync(user, "Staff").GetAwaiter().GetResult();
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
         public IActionResult ManageStaff()
         {
-            var staffRoleId = _db.Roles.FirstOrDefault(x => x.Name == "Staff").Id;
+            
             var user = _userManager.GetUsersInRoleAsync("Staff").Result;
             return View(user);
         }
-        //[HttpGet]
-        //public IActionResult Delete(int Id)
-        //{
-        //    var staffinDb = _db.Users.SingleOrDefault(item => item. == Id);
-        //    _db.Categories.Remove(categoryinDb);
-        //    _db.SaveChanges();
+        [HttpGet]
+        public IActionResult Delete(string Id)
+        {
+            
+            var staffindb = _db.Users.SingleOrDefault(item => item.Id == Id);
+            _db.Users.Remove(staffindb);
+            _db.SaveChanges();
 
-        //    return RedirectToAction("Index");
-        //}
+            return RedirectToAction("ManageStaff");
+        }
+        
+        public ActionResult EditStaff(string Id)
+        {
+
+            var todoInDb = _db.Users
+              .SingleOrDefault(item => item.Id == Id);
+
+            return View(todoInDb);
+        }
+
+        [HttpPost]
+        public ActionResult EditStaff(User user)
+        {
+            var staffinDb = _db.Users.SingleOrDefault(item => item.Id == user.Id);
+            staffinDb.FullName = user.FullName;
+            staffinDb.Address = user.Address;
+            staffinDb.Age = user.Age;
+            _db.SaveChanges();
+
+            return RedirectToAction("ManageStaff");
+        }
+
+        //Action Trainer
+        public IActionResult CreateTrainer()
+        {
+            TrainerProfile model = new TrainerProfile();
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult CreateTrainer(TrainerProfile trainerProfile)
+        {
+            var user = trainerProfile.User;
+            IdentityResult result = _userManager.CreateAsync(user, "Trainer@123").GetAwaiter().GetResult();
+            _userManager.AddToRoleAsync(user, "Trainer");
+
+            var trainer = new TrainerProfile();
+            trainer.UserId = user.Id;
+            trainer.Specialty = trainerProfile.Specialty;
+            _db.TrainerProfiles.Add(trainer);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public IActionResult ManageTrainer()
+        {
+            var trainerinDB = _db.TrainerProfiles.Include(x => x.User).ToList();
+            
+            return View(trainerinDB);
+        }
+
+
     }
+
 }

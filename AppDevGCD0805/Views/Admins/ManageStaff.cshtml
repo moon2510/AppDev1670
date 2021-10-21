@@ -27,7 +27,7 @@
                     <td>@item.UserName</td>
                     <td>
                         @Html.ActionLink(" Delete", "Delete", "Admins", new { Id = item.Id }, new { @class = "btn btn-outline-danger fas fa-trash-alt" })
-                        @Html.ActionLink(" Edit", "Edit", "Admins", new { id = item.Id }, new { @class = "btn btn-outline-info 	fas fa-edit" })
+                        @Html.ActionLink(" Edit", "EditStaff", "Admins", new { Id = item.Id }, new { @class = "btn btn-outline-info 	fas fa-edit" })
                         @Html.ActionLink("Reset password", "Resetpass", "Admins")
                     </td>
                 </tr>
