@@ -12,7 +12,6 @@ namespace AppDevGCD0805.Models
 		public int Age { get; set; }
 		public string Address { get; set; }
 
-
 		
 	}
 }

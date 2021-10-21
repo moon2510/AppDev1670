@@ -1,0 +1,24 @@
+﻿@model AppDevGCD0805.Models.User
+
+
+
+<h1>Edit</h1>
+<form asp-controller="Admins" asp-action="EditTrainer" method="post">
+  <div class="form-group">
+    <label>Full Name</label>
+    <input type="text" class="form-control" placeholder="Input full name" asp-for="FullName">
+  </div>
+  <div class="form-group">
+    <label>Address</label>
+    <input type="text" class="form-control" placeholder="Input Address" asp-for="Address">
+  </div>
+  <div class="form-group">
+    <label>Age</label>
+    <input type="text" class="form-control" placeholder="Input age" asp-for="Age">
+  </div>
+
+
+
+
+  <button type="submit" class="btn btn-outline-info">Edit</button>
+</form>
