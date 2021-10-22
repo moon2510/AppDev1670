@@ -1,0 +1,58 @@
+﻿@model AppDevGCD0805.Models.TraineeProfile
+  @{
+    ViewBag.Title = "Index";
+  }
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <h2>My Profile</h2>
+
+  @Html.ActionLink("View Course", "ViewCourse", "Trainees", new { id = @Model.UserId }, new { @class = "btn btn-success" })
+
+<style>
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+  }
+
+  .title {
+    color: grey;
+    font-size: 18px;
+  }
+
+  .button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #3498DB;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+
+
+  button:hover, a:hover {
+    opacity: 0.7;
+  }
+</style>
+
+<div class="card">
+  <img src="https://sites.google.com/site/startthanhblog/_/rsrc/1487928271857/top-anh-hacker/hacker1/76.jpeg?height=320&width=320" alt="John" style="width:100%">
+  <br>
+  <h3><b>@Model.User.FullName</b></h3>
+  <p class="title">Age: @Model.User.Age</p>
+  <p>Address: @Model.User.Address</p>
+  <p>Date of birth: @Model.DateOfBirth.ToString("d")</p>
+  <p>Education: @Model.Education</p>
+  <div style="margin: 0 0;">
+    <a href="https://www.linkedin.com/in/minh-nguyet-404/" target="_blank"><i class="fa fa-linkedin"></i></a>
+    <a href="https://www.facebook.com/giih404/" target="_blank"><i class="fa fa-facebook"></i></a>
+    <a href="https://github.com/moon2510" target="_blank"><i class="fa fa-github"></i></a>
+
+  </div>
+  <p><a href="https://github.com/moon2510" class="button">Profile</a></p>
+</div>

@@ -1,0 +1,40 @@
+﻿<div class="jumbotron">
+    <h1>FPT Training System</h1>
+    <p class="lead">Welcome staff.</p>
+</div>
+<center><img src="~/staff.png" style="max-width: auto; max-height: auto" /></center>
+
+<br />
+<div class="card border-primary mb-3" style="max-width: 72rem">
+    <div class="card-header">About training staff role</div>
+    <div class="card-body text-primary">
+        <p class="card-text">- Training staff can create and manage trainee accounts.</p>
+        <p class="card-text">- Training staff can search for trainees by their name and age.</p>
+        <p class="card-text">- Training staff can create and manage course category.</p>
+        <p class="card-text">- Training staff can manage courses.</p>
+        <p class="card-text">- Training staff can assign Trainers/ Trainees to a course. And can remove courses from Trainers/ Trainees.</p>
+        <p class="card-text">- Training staff can search Trainers/ Trainees by entering Enrolled Course Name.</p>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card border-success mb-3">
+            <div class="card-header">Create Trainee account.</div>
+            <div class="card-body text-success">
+                <p class="card-text">Click the button below to create Trainee account.</p>
+                <a class="nav-link btn btn-outline-success" asp-controller="TrainingStaffs" asp-action="CreateTrainee">Create</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card border-info mb-3">
+            <div class="card-header">Management Trainee account.</div>
+            <div class="card-body text-info">
+                <p class="card-text">Click the button below to manage Trainee account.</p>
+                <a class="nav-link btn btn-outline-info" asp-controller="TrainingStaffs" asp-action="ManageTrainee">Manage</a>
+            </div>
+        </div>
+    </div>
+</div>
