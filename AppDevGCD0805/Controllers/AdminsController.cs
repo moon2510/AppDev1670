@@ -101,7 +101,7 @@ namespace AppDevGCD0805.Controllers
             
             _db.TrainerProfiles.Add(trainer);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("ManageTrainer");
         }
         public IActionResult ManageTrainer()
         {

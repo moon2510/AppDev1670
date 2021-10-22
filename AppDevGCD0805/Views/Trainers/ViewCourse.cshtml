@@ -1,0 +1,31 @@
+﻿@model  ICollection<AppDevGCD0805.Models.AssignTrainerCourse>
+@{
+  ViewBag.Title = "View Course";
+}
+
+<h2>My Course</h2>
+
+
+
+<table class="table">
+        <thead class="thead-dark">
+          <tr>
+
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Category</th>
+
+          </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+          <tr>
+            <td>@item.Course.Name</td>
+            <td>@item.Course.Description</td>
+            <td>@item.Course.Category.Name</td>
+          </tr>
+            }
+
+        </tbody>
+    </table>

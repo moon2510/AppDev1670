@@ -3,6 +3,7 @@ using AppDevGCD0805.Data.Migrations;
 using AppDevGCD0805.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +49,13 @@ namespace AppDevGCD0805.Controllers
 
             _db.TraineeProfiles.Add(trainee);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("ManageTrainee");
+        }
+         public IActionResult ManageTrainee()
+         {
+            var traineeinDB = _db.TraineeProfiles.Include(x => x.User).ToList();
+
+            return View(traineeinDB);
         }
     }
 }
