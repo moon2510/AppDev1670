@@ -1,7 +1,7 @@
 ﻿
-@model IEnumerable<AppDevGCD0805.Models.TrainerProfile>
+@model IEnumerable<AppDevGCD0805.Models.TraineeProfile>
 
-<h1>Trainer account</h1>
+<h1>Trainee account</h1>
 <main>
 
     <table class="table">
@@ -13,7 +13,8 @@
                 <th scope="col">Age</th>
                 <th scope="col">Email</th>
                 <th scope="col">User Name</th>
-                <th scope="col">Specialty</th>
+                <th scope="col">Date Of Birth</th>
+                <th scope="col">Education</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -27,7 +28,8 @@
                     <td>@item.User.Age</td>
                     <td>@item.User.Email</td>
                     <td>@item.User.UserName</td>
-                    <td>@item.Specialty</td>
+                    <td>@item.DateOfBirth</td>
+                    <td>@item.Education</td>
                     <td>
                         @Html.ActionLink(" Delete", "Delete", "Admins", new { Id = item.User.Id }, new { @class = "btn btn-outline-danger fas fa-trash-alt" })
                         @Html.ActionLink(" Edit", "EditTrainer", "Admins", new { Id = item.User.Id }, new { @class = "btn btn-outline-info 	fas fa-edit" })
