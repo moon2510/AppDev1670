@@ -5,6 +5,8 @@ namespace AppDevGCD0805.Data.Migrations
 {
     public partial class TraineeProfile : Migration
     {
+        public object User { get; internal set; }
+
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(

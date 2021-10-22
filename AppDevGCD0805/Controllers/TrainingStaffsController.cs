@@ -56,6 +56,6 @@ namespace AppDevGCD0805.Controllers
             var traineeinDB = _db.TraineeProfiles.Include(x => x.User).ToList();
 
             return View(traineeinDB);
-         }
-   }
+        }
+    }
 }
