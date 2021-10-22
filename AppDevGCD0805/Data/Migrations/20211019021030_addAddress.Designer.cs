@@ -4,14 +4,16 @@ using AppDevGCD0805.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AppDevGCD0805.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211019021030_addAddress")]
+    partial class addAddress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -191,41 +193,6 @@ namespace AppDevGCD0805.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "e2d2cf72-528a-44cb-8b6b-da4a3403fdaa",
-                            AccessFailedCount = 0,
-                            Age = 0,
-                            ConcurrencyStamp = "982a10f2-ab14-47e2-8861-1f9a226c0ceb",
-                            Email = "admin@gmail.com",
-                            EmailConfirmed = true,
-                            FullName = "Le Trung Kien",
-                            LockoutEnabled = false,
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPQaaa6QArtBDPlqyVJKF8na0ASSbm/Y13eDFEYrzhJCJNMhf3pnk9LTk7sMph9e3A==",
-                            PhoneNumberConfirmed = true,
-                            SecurityStamp = "f3307ff1-1971-4fa2-a724-35f9c9427917",
-                            TwoFactorEnabled = false,
-                            UserName = "admin@gmail.com"
-                        },
-                        new
-                        {
-                            Id = "6fbf7958-e5d6-44ce-b3de-3ffcd00fd7bf",
-                            AccessFailedCount = 0,
-                            Age = 0,
-                            ConcurrencyStamp = "c90ce03c-2afd-47ed-8b43-2a23bdbbbf06",
-                            Email = "staff@gmail.com",
-                            EmailConfirmed = true,
-                            FullName = "Le Tran Thai Tuan",
-                            LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAELden/yZWORJ3wgerqUcKBgrjbgo0yG4ryMN1PuqSUpbZWXzWPe8/wdP7Wa+q8lgKA==",
-                            PhoneNumberConfirmed = true,
-                            SecurityStamp = "c8c07c0b-d80c-4256-805a-5113d1325551",
-                            TwoFactorEnabled = false,
-                            UserName = "staff@gmail.com"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -253,36 +220,6 @@ namespace AppDevGCD0805.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "fa066d24-8601-4b73-bf81-6d387ad55afc",
-                            ConcurrencyStamp = "62a38795-fff2-4f47-9f5e-9c773160e3ec",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "1a67150b-ff3b-4b03-9a8b-c8e9acca9edf",
-                            ConcurrencyStamp = "c30e3587-fb73-4dd4-a298-f86983f1fb5e",
-                            Name = "Staff",
-                            NormalizedName = "STAFF"
-                        },
-                        new
-                        {
-                            Id = "dbaeebb9-7008-4112-9267-96e232eebe09",
-                            ConcurrencyStamp = "675a2cf1-ebb4-4a06-8c5d-bcc7e8b85683",
-                            Name = "Trainer",
-                            NormalizedName = "TRAINER"
-                        },
-                        new
-                        {
-                            Id = "b683a767-4c15-4a76-a652-82f8d98bd160",
-                            ConcurrencyStamp = "75753d2c-885d-46d8-871f-9da79255b520",
-                            Name = "Trainee",
-                            NormalizedName = "TRAINEE"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -336,10 +273,12 @@ namespace AppDevGCD0805.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -368,18 +307,6 @@ namespace AppDevGCD0805.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "e2d2cf72-528a-44cb-8b6b-da4a3403fdaa",
-                            RoleId = "fa066d24-8601-4b73-bf81-6d387ad55afc"
-                        },
-                        new
-                        {
-                            UserId = "6fbf7958-e5d6-44ce-b3de-3ffcd00fd7bf",
-                            RoleId = "1a67150b-ff3b-4b03-9a8b-c8e9acca9edf"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -388,10 +315,12 @@ namespace AppDevGCD0805.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");

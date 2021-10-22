@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="jumbotron">
+    <h1>FPT Training System</h1>
+    <p class="lead">Welcome admin.</p>
+</div>
+<div class="row">
+    <div class="col-6">
+        <center><img src="~/admin.png" style="max-width: 18rem;"  /></center>
+    </div>
+    <div class="col-6">
+        <div class="card border-primary mb-3" style="max-width: 36rem;">
+            <div class="card-header">About administrator role</div>
+            <div class="card-body text-primary">
+                <p class="card-text">- Admin can create accounts for Trainer and Training Staff.</p>
+                <p class="card-text">- Admin can manage accounts for Trainer and Training Staff.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="card border-info mb-3">
+            <div class="card-header">Management Training Staff account.</div>
+            <div class="card-body text-info">
+                <p class="card-text">Click the button below to manage Training Staff account.</p>
+                <a class="nav-link btn btn-outline-info" asp-controller="Admins" asp-action="ManageStaff">Manage</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card border-info mb-3">
+            <div class="card-header">Management Trainer account.</div>
+            <div class="card-body text-info">
+                <p class="card-text">Click the button below to manage Trainer account.</p>
+                <a class="nav-link btn btn-outline-info" asp-controller="Admins" asp-action="ManageTrainer">Manage</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card border-success mb-3">
+            <div class="card-header">Create Training Staff account.</div>
+            <div class="card-body text-success">
+                <p class="card-text">Click the button below to create Training Staff account.</p>
+                <a class="nav-link btn btn-outline-success"  asp-controller="Admins" asp-action="CreateStaff">Create</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card border-success mb-3">
+            <div class="card-header">Create Trainer account.</div>
+            <div class="card-body text-success">
+                <p class="card-text">Click the button below to create Trainer account.</p>
+                <a class="nav-link btn btn-outline-success" asp-controller="Admins" asp-action="CreateTrainer">Create</a>
+            </div>
+        </div>
+    </div>
+</div>
+

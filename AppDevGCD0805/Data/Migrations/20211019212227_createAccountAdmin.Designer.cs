@@ -4,14 +4,16 @@ using AppDevGCD0805.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AppDevGCD0805.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211019212227_createAccountAdmin")]
+    partial class createAccountAdmin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -195,36 +197,36 @@ namespace AppDevGCD0805.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e2d2cf72-528a-44cb-8b6b-da4a3403fdaa",
+                            Id = "e48d61de-1aad-409a-b816-0fbcafb0b828",
                             AccessFailedCount = 0,
                             Age = 0,
-                            ConcurrencyStamp = "982a10f2-ab14-47e2-8861-1f9a226c0ceb",
+                            ConcurrencyStamp = "ce43bb37-babd-42d7-9708-9c4344eff756",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Le Trung Kien",
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPQaaa6QArtBDPlqyVJKF8na0ASSbm/Y13eDFEYrzhJCJNMhf3pnk9LTk7sMph9e3A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFU+BcbXj4BJL4gv9Z3yziZH4ba3fzF1nSTwL7XaLjgICzLMTyWaGmsItllyJLUsbg==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "f3307ff1-1971-4fa2-a724-35f9c9427917",
+                            SecurityStamp = "9e24c652-8a43-4101-862d-98869a25f507",
                             TwoFactorEnabled = false,
-                            UserName = "admin@gmail.com"
+                            UserName = "admin"
                         },
                         new
                         {
-                            Id = "6fbf7958-e5d6-44ce-b3de-3ffcd00fd7bf",
+                            Id = "99a0d65f-e071-4e3f-9dfb-b51651c6f148",
                             AccessFailedCount = 0,
                             Age = 0,
-                            ConcurrencyStamp = "c90ce03c-2afd-47ed-8b43-2a23bdbbbf06",
+                            ConcurrencyStamp = "75a4202c-3e6a-485d-ad7a-149fdafa18ab",
                             Email = "staff@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Le Tran Thai Tuan",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAELden/yZWORJ3wgerqUcKBgrjbgo0yG4ryMN1PuqSUpbZWXzWPe8/wdP7Wa+q8lgKA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOI+HnfgNV8H/wKzCdwTHjCPpwLDnaXfhHMsjofYUMdMdiWyWPXV6n2IqbJpfTAL7w==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "c8c07c0b-d80c-4256-805a-5113d1325551",
+                            SecurityStamp = "f471c990-0edc-4d10-844e-091abc0b36ba",
                             TwoFactorEnabled = false,
-                            UserName = "staff@gmail.com"
+                            UserName = "staff"
                         });
                 });
 
@@ -257,29 +259,29 @@ namespace AppDevGCD0805.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fa066d24-8601-4b73-bf81-6d387ad55afc",
-                            ConcurrencyStamp = "62a38795-fff2-4f47-9f5e-9c773160e3ec",
+                            Id = "2741778b-ebe6-4eda-a410-a29e79117a7e",
+                            ConcurrencyStamp = "aa518e65-833d-406b-8c97-a299c61baa61",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "1a67150b-ff3b-4b03-9a8b-c8e9acca9edf",
-                            ConcurrencyStamp = "c30e3587-fb73-4dd4-a298-f86983f1fb5e",
+                            Id = "f422ddf5-4b35-4280-a9c1-8455c34c9ca3",
+                            ConcurrencyStamp = "38b5f4c8-e23b-4bc0-8f14-cb32434ea2a8",
                             Name = "Staff",
                             NormalizedName = "STAFF"
                         },
                         new
                         {
-                            Id = "dbaeebb9-7008-4112-9267-96e232eebe09",
-                            ConcurrencyStamp = "675a2cf1-ebb4-4a06-8c5d-bcc7e8b85683",
+                            Id = "18b891b5-e12a-430e-bad0-47f62c820cbc",
+                            ConcurrencyStamp = "c6e1a026-5f53-4985-9677-8859da50a45d",
                             Name = "Trainer",
                             NormalizedName = "TRAINER"
                         },
                         new
                         {
-                            Id = "b683a767-4c15-4a76-a652-82f8d98bd160",
-                            ConcurrencyStamp = "75753d2c-885d-46d8-871f-9da79255b520",
+                            Id = "f37717ed-3abe-4e88-9566-814d0bccd28f",
+                            ConcurrencyStamp = "6cf3e930-8572-47e4-8684-69ce0a141424",
                             Name = "Trainee",
                             NormalizedName = "TRAINEE"
                         });
@@ -336,10 +338,12 @@ namespace AppDevGCD0805.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -372,13 +376,13 @@ namespace AppDevGCD0805.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "e2d2cf72-528a-44cb-8b6b-da4a3403fdaa",
-                            RoleId = "fa066d24-8601-4b73-bf81-6d387ad55afc"
+                            UserId = "e48d61de-1aad-409a-b816-0fbcafb0b828",
+                            RoleId = "2741778b-ebe6-4eda-a410-a29e79117a7e"
                         },
                         new
                         {
-                            UserId = "6fbf7958-e5d6-44ce-b3de-3ffcd00fd7bf",
-                            RoleId = "1a67150b-ff3b-4b03-9a8b-c8e9acca9edf"
+                            UserId = "99a0d65f-e071-4e3f-9dfb-b51651c6f148",
+                            RoleId = "f422ddf5-4b35-4280-a9c1-8455c34c9ca3"
                         });
                 });
 
@@ -388,10 +392,12 @@ namespace AppDevGCD0805.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");

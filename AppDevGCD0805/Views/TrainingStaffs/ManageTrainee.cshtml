@@ -1,0 +1,43 @@
+﻿
+@model IEnumerable<AppDevGCD0805.Models.TraineeProfile>
+
+<h1>Trainee account</h1>
+<main>
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+
+                <th scope="col">Full Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Age</th>
+                <th scope="col">Email</th>
+                <th scope="col">User Name</th>
+                <th scope="col">Date Of Birth</th>
+                <th scope="col">Education</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.User.FullName</td>
+                    <td>@item.User.Address</td>
+                    <td>@item.User.Age</td>
+                    <td>@item.User.Email</td>
+                    <td>@item.User.UserName</td>
+                    <td>@item.DateOfBirth</td>
+                    <td>@item.Education</td>
+                    <td>
+                        @Html.ActionLink(" Delete", "Delete", "Admins", new { Id = item.User.Id }, new { @class = "btn btn-outline-danger fas fa-trash-alt" })
+                        @Html.ActionLink(" Edit", "EditTrainer", "Admins", new { Id = item.User.Id }, new { @class = "btn btn-outline-info 	fas fa-edit" })
+                        @Html.ActionLink(" Change password", "ChangePassword", "Admins", new { UserId = item.User.Id }, new { @class = "btn btn-outline-warning fas fa-unlock-alt" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</main>
+

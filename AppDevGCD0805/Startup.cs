@@ -33,8 +33,10 @@ namespace AppDevGCD0805
 					  Configuration.GetConnectionString("DefaultConnection")));
 			services.AddDatabaseDeveloperPageExceptionFilter();
 
-			services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
-				 .AddEntityFrameworkStores<ApplicationDbContext>();
+			services.AddIdentity<User, IdentityRole>()
+				.AddEntityFrameworkStores<ApplicationDbContext>()
+				.AddDefaultUI()
+				.AddDefaultTokenProviders();
 			services.AddControllersWithViews();
 		}
 
