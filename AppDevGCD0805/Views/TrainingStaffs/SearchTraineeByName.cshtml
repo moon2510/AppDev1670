@@ -3,12 +3,15 @@
 
 <h1>Trainee account</h1>
 <main>
-    <form asp-controller="TrainingStaffs" asp-action="SearchTraineeByName">
-        <p>
-            Title: <input type="text" name="SearchString" />
-            <input type="submit" value="Submit" />
-        </p>
+    <form asp-controller="TrainingStaffs" asp-action="SearchTraineeByName" method="post">
+        <div class="input-group col-md-3">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search by name" aria-label="Search" name="SearchString">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
     </form>
+    <br />
 
 
 
@@ -28,7 +31,7 @@
         </thead>
         <tbody>
             @foreach (var item in Model)
-             {
+            {
                 <tr>
 
                     <td>@item.User.FullName</td>
@@ -44,7 +47,7 @@
 
                     </td>
                 </tr>
-             }
+            }
         </tbody>
     </table>
 </main>
