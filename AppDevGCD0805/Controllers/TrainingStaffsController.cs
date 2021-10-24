@@ -77,7 +77,23 @@ namespace AppDevGCD0805.Controllers
             return View(todoInDb);
         }
 
-        public ActionResult SearchTraineeByName(string searchString)
+         [HttpPost]
+      public ActionResult Edit(TraineeProfile traineeProfile)
+      {
+         
+         var traineeinDb = _db.TraineeProfiles.Include(x => x.User).SingleOrDefault(x => x.UserId == traineeProfile.User.Id);
+         var user = _db.Users.SingleOrDefault(x => x.Id == traineeProfile.User.Id);
+         user.FullName = traineeProfile.User.FullName;
+         user.Address = traineeProfile.User.Address;
+         user.Age = traineeProfile.User.Age;
+         traineeinDb.DateOfBirth = traineeProfile.DateOfBirth;
+         traineeProfile.Education = traineeProfile.Education;
+
+         _db.SaveChanges();
+
+         return RedirectToAction("ManageTrainee");
+      }
+      public ActionResult SearchTraineeByName(string searchString)
         {
             var trainees = _db.TraineeProfiles.Include(x => x.User);
                         

@@ -63,18 +63,17 @@ namespace AppDevGCD0805.Controllers
       public ActionResult ViewCourse()
       {
          var userId = _userManager.GetUserId(User);
-         var courseinDb = _db.AssignTrainerCourses.Include(x => x.Course).ThenInclude(x=>x.Category).Where(x=>x.UserId==userId).ToList();
+         var courseinDb = _db.AssignTrainerCourses.Include(x => x.Course).ThenInclude(x=>x.Category)
+            .Where(x=>x.UserId==userId).ToList();
 
          return View(courseinDb);
       }
 
-      //public ActionResult ViewTrainee()
-      //{
-      //   var userId = _userManager.GetUserId(User);
-      //   var courseinDb = _db.AssignTrainerCourses.Include(x => x.Course).ThenInclude(x => x.Category).Where(x => x.UserId == userId).ToList();
-
-      //   return View(courseinDb);
-      //}
-
+      public ActionResult ViewTrainee(int id)
+      {
+         var query = _db.TraineeProfiles.Include(x => x.AssignTraineeCourses).Include(x => x.User).AsQueryable();
+         var traineeinDb = query.Where(x =>x.AssignTraineeCourses.Where(x=>x.CourseId==id).Any()).ToList(); 
+         return View(traineeinDb);
+      }
    }
 }

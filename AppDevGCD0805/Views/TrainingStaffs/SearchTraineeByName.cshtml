@@ -39,7 +39,7 @@
                     <td>@item.User.Age</td>
                     <td>@item.User.Email</td>
                     <td>@item.User.UserName</td>
-                    <td>@item.DateOfBirth</td>
+                    <td>@item.DateOfBirth.ToString("d")</td>
                     <td>@item.Education</td>
                     <td>
                         @Html.ActionLink(" Delete", "Delete", "TrainingStaffs", new { Id = item.User.Id }, new { @class = "btn btn-outline-danger fas fa-trash-alt" })
