@@ -40,8 +40,10 @@ namespace AppDevGCD0805.Controllers
         {
             var user = traineeProfile.User;
             IdentityResult result = _userManager.CreateAsync(user, user.PasswordHash).GetAwaiter().GetResult();
-            _userManager.AddToRoleAsync(user, "Trainee");
-
+            if (result.Succeeded)
+            {
+                _userManager.AddToRoleAsync(user, "Trainee").GetAwaiter().GetResult();
+            }
             var trainee = new TraineeProfile();
             trainee.UserId = user.Id;
             trainee.DateOfBirth = traineeProfile.DateOfBirth;
@@ -51,11 +53,55 @@ namespace AppDevGCD0805.Controllers
             _db.SaveChanges();
             return RedirectToAction("ManageTrainee");
         }
-         public IActionResult ManageTrainee()
-         {
+        public IActionResult ManageTrainee()
+        {
             var traineeinDB = _db.TraineeProfiles.Include(x => x.User).ToList();
 
             return View(traineeinDB);
         }
+        public IActionResult Delete(string Id)
+        {
+
+            var staffindb = _db.Users.SingleOrDefault(item => item.Id == Id);
+            _db.Users.Remove(staffindb);
+            _db.SaveChanges();
+
+            return RedirectToAction("ManageTrainee");
+        }
+
+        public ActionResult Edit(string Id)
+        {
+
+            var todoInDb = _db.TraineeProfiles.Include(x => x.User).SingleOrDefault(item => item.User.Id == Id);
+
+            return View(todoInDb);
+        }
+
+        public ActionResult SearchTrainee(string searchString, int age)
+        {
+            var trainees = _db.TraineeProfiles.Include(x => x.User);
+                        
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var result = trainees.Where(s => s.User.FullName.Contains(searchString));
+                
+                if( age != 0)
+                {
+                    var final = result.Where(s => s.User.Age == age);
+                    return View(final.ToList());
+                }
+                return View(result.ToList());
+            }
+
+            if (age != 0)
+            {
+                var final = trainees.Where(s => s.User.Age == age);
+                return View(final.ToList());
+            }
+            return RedirectToAction("ManageTrainee");
+
+        }
+
     }
 }
