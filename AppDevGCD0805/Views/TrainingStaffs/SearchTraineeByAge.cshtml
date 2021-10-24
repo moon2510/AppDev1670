@@ -3,15 +3,6 @@
 
 <h1>Trainee account</h1>
 <main>
-    <form asp-controller="TrainingStaffs" asp-action="SearchTraineeByName" method="post">
-        <div class="input-group col-md-3">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search by name" aria-label="Search" name="SearchString">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                <i class="fas fa-search"></i>
-            </button>
-        </div>
-    </form>
-    <br />
     <form asp-controller="TrainingStaffs" asp-action="SearchTraineeByAge" method="post">
         <div class="input-group col-md-3">
             <input class="form-control mr-sm-2" type="text" placeholder="Search by age" aria-label="Search" name="SearchString">
@@ -22,17 +13,6 @@
     </form>
     <br />
 
-    <form asp-controller="TrainingStaffs" asp-action="SearchTrainee" method="post">
-        <div class="input-group col-md-6">
-            <input class="form-control mr-sm-2 col-md-4" type="text" placeholder="Search by name" aria-label="Search" name="SearchString">
-            <input class="form-control mr-sm-2 col-md-4" type="text" placeholder="Search by age" aria-label="Search" name="age">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                <i class="fas fa-search"></i>
-            </button>
-        </div>
-    </form>
-
-    <br />
 
     <table class="table">
         <thead class="thead-dark">
