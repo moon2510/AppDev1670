@@ -39,8 +39,7 @@ namespace AppDevGCD0805.Controllers
       public ActionResult ViewCourse()
       {
          var userId = _userManager.GetUserId(User);
-         var courseinDb = _db.AssignTraineeCourses.Include(x => x.Course).ThenInclude(x => x.Category)
-            .Where(x => x.UserId == userId).ToList();
+         var courseinDb = _db.AssignTraineeCourses.Include(x => x.Course).ThenInclude(x => x.Category).Where(x => x.UserId == userId).ToList();
 
          return View(courseinDb);
       }
