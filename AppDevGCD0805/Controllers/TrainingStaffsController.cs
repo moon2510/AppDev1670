@@ -79,23 +79,7 @@ namespace AppDevGCD0805.Controllers
             return View(todoInDb);
         }
 
-         [HttpPost]
-      public ActionResult Edit(TraineeProfile traineeProfile)
-      {
-         
-         var traineeinDb = _db.TraineeProfiles.Include(x => x.User).SingleOrDefault(x => x.UserId == traineeProfile.User.Id);
-         var user = _db.Users.SingleOrDefault(x => x.Id == traineeProfile.User.Id);
-         user.FullName = traineeProfile.User.FullName;
-         user.Address = traineeProfile.User.Address;
-         user.Age = traineeProfile.User.Age;
-         traineeinDb.DateOfBirth = traineeProfile.DateOfBirth;
-         traineeProfile.Education = traineeProfile.Education;
-
-         _db.SaveChanges();
-
-         return RedirectToAction("ManageTrainee");
-      }
-      public ActionResult SearchTraineeByName(string searchString)
+        public ActionResult SearchTrainee(string searchString, int age)
         {
             var trainees = _db.TraineeProfiles.Include(x => x.User);
                         
@@ -103,21 +87,19 @@ namespace AppDevGCD0805.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 var result = trainees.Where(s => s.User.FullName.Contains(searchString));
+                
+                if( age != 0)
+                {
+                    var final = result.Where(s => s.User.Age == age);
+                    return View(final.ToList());
+                }
                 return View(result.ToList());
             }
-            return RedirectToAction("ManageTrainee");
 
-        }
-
-        public ActionResult SearchTraineeByAge(int searchString)
-        {
-            var trainees = _db.TraineeProfiles.Include(x => x.User);
-
-
-            if (searchString != null)
+            if (age != 0)
             {
-                var result = trainees.Where(s => s.User.Age == searchString);
-                return View(result.ToList());
+                var final = trainees.Where(s => s.User.Age == age);
+                return View(final.ToList());
             }
             return RedirectToAction("ManageTrainee");
 
