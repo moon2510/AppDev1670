@@ -139,14 +139,24 @@ namespace AppDevGCD0805.Controllers
 
       }
 
+      //public ActionResult ViewCourseTrainer(string id)
+      //{
+      //   var trainers = _db.Users.SingleOrDefault(x => x.Id == id);
+      //   ViewBag.User = trainers.FullName;
+      //   var courseinDb = _db.AssignTrainerCourses.Include(x => x.Course).ThenInclude(x => x.Category)
+      //      .Where(x => x.UserId == id).ToList();
+
+      //   return View("ViewCourseTrainer");
+      //}
       [HttpPost]
       public ActionResult AssignTrainer(AssignTrainerCourse assignTrainerCourse)
       {
          _db.AssignTrainerCourses.Add(assignTrainerCourse);
          _db.SaveChanges();
-         return View();
+         return View("Index");
 
       }
+
 
    }
 }

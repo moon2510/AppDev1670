@@ -72,7 +72,9 @@ namespace AppDevGCD0805.Controllers
       public ActionResult ViewTrainee(int id)
       {
          var query = _db.TraineeProfiles.Include(x => x.AssignTraineeCourses).Include(x => x.User).AsQueryable();
+
          var traineeinDb = query.Where(x =>x.AssignTraineeCourses.Where(x=>x.CourseId==id).Any()).ToList(); 
+
          return View(traineeinDb);
       }
    }
