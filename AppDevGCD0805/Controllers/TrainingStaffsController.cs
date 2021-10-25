@@ -3,11 +3,13 @@ using AppDevGCD0805.Data.Migrations;
 using AppDevGCD0805.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AssignTrainerCourse = AppDevGCD0805.Models.AssignTrainerCourse;
 using TraineeProfile = AppDevGCD0805.Models.TraineeProfile;
 
 namespace AppDevGCD0805.Controllers
@@ -119,7 +121,32 @@ namespace AppDevGCD0805.Controllers
             }
             return RedirectToAction("ManageTrainee");
 
-        }
+      }
+      
+      public ActionResult AssignTrainer(string id)
+      {
+         var model = new AssignTrainerCourse() { UserId=id };
+         var trainers = _db.Users.SingleOrDefault(x => x.Id == id);
+         ViewBag.User = trainers.FullName;
 
-    }
+         var course = _db.Courses.ToList();
+         var courseList = _db.Courses.Select(x => new { x.Id, x.Name }).ToList();
+
+         ViewBag.CourseList = new SelectList(courseList, "Id", "Name");
+
+
+         return View(model);
+
+      }
+
+      [HttpPost]
+      public ActionResult AssignTrainer(AssignTrainerCourse assignTrainerCourse)
+      {
+         _db.AssignTrainerCourses.Add(assignTrainerCourse);
+         _db.SaveChanges();
+         return View();
+
+      }
+
+   }
 }
