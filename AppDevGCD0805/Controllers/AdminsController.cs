@@ -40,10 +40,15 @@ namespace AppDevGCD0805.Controllers
         [HttpPost]
         public IActionResult CreateStaff(User user)
         {
+            user.UserName = user.Email;
             IdentityResult result = _userManager.CreateAsync(user, user.PasswordHash).GetAwaiter().GetResult();
-            IdentityResult roleReulst = _userManager.AddToRoleAsync(user, "Staff").GetAwaiter().GetResult();
+
+            if (result.Succeeded)
+            {
+               _userManager.AddToRoleAsync(user, "Staff").GetAwaiter().GetResult();
+            }
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("ManageStaff");
         }
         public IActionResult ManageStaff()
         {
@@ -94,16 +99,20 @@ namespace AppDevGCD0805.Controllers
         public IActionResult CreateTrainer(TrainerProfile trainerProfile)
         {
             var user = trainerProfile.User;
+            user.UserName = user.Email;
             IdentityResult result = _userManager.CreateAsync(user, user.PasswordHash).GetAwaiter().GetResult();
-            _userManager.AddToRoleAsync(user, "Trainer");
-
+            
+            if (result.Succeeded)
+            {
+               _userManager.AddToRoleAsync(user, "Trainer").GetAwaiter().GetResult();
+            }
             var trainer = new TrainerProfile();
             trainer.UserId = user.Id;
             trainer.Specialty = trainerProfile.Specialty;
             
             _db.TrainerProfiles.Add(trainer);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("ManageTrainer");
         }
         public IActionResult ManageTrainer()
         {

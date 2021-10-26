@@ -44,6 +44,7 @@ namespace AppDevGCD0805.Controllers
         public IActionResult CreateTrainee(TraineeProfile traineeProfile)
         {
             var user = traineeProfile.User;
+            user.UserName = user.Email;
             IdentityResult result = _userManager.CreateAsync(user, user.PasswordHash).GetAwaiter().GetResult();
             if (result.Succeeded)
             {
@@ -122,10 +123,16 @@ namespace AppDevGCD0805.Controllers
             return RedirectToAction("ManageTrainee");
 
         }
-      
-       
+         public IActionResult ViewTrainer()
+         {
+            var trainerinDB = _db.TrainerProfiles.Include(x => x.User).ToList();
 
-        public ActionResult AssignTrainer(string id)
+            return View(trainerinDB);
+         }
+
+
+
+      public ActionResult AssignTrainer(string id)
         {
            var model = new AssignTrainerCourse() { UserId=id };
            var trainers = _db.Users.SingleOrDefault(x => x.Id == id);
@@ -141,16 +148,7 @@ namespace AppDevGCD0805.Controllers
 
         }
 
-      public ActionResult ViewCourseTrainer(string id)
-      {
-         
-         var courseinDb = _db.AssignTrainerCourses.Include(x => x.Course).ThenInclude(x => x.Category)
-            .Where(x => x.UserId == id).ToList();
-
-         ViewBag.user = _db.Users.SingleOrDefault(x => x.Id==id);
-
-         return View(courseinDb);
-      }
+      
       [HttpPost]
       public ActionResult AssignTrainer(AssignTrainerCourse assignTrainerCourse)
       {
@@ -159,6 +157,17 @@ namespace AppDevGCD0805.Controllers
          //return RedirectToAction("ViewCourse","Trainers", new {id = assignTrainerCourse.UserId });
 
          return RedirectToAction("ViewCourseTrainer","TrainingStaffs", new { id = assignTrainerCourse.UserId });
+      }
+
+      public ActionResult ViewCourseTrainer(string id)
+      {
+
+         var courseinDb = _db.AssignTrainerCourses.Include(x => x.Course).ThenInclude(x => x.Category)
+            .Where(x => x.UserId == id).ToList();
+
+         ViewBag.user = _db.Users.SingleOrDefault(x => x.Id == id);
+
+         return View(courseinDb);
       }
 
       public IActionResult DeleteCourseTrainer(int Id, string userId)
@@ -199,6 +208,7 @@ namespace AppDevGCD0805.Controllers
 
          return View(courseinDb);
       }
+      
       [HttpPost]
       public ActionResult AssignTrainee(AssignTraineeCourse assignTraineeCourse)
       {
@@ -206,6 +216,19 @@ namespace AppDevGCD0805.Controllers
          _db.SaveChanges();
          //return RedirectToAction("ViewCourse","Trainers", new {id = assignTrainerCourse.UserId });
 
+         return RedirectToAction("ViewCourseTrainee", "TrainingStaffs", new { id = assignTraineeCourse.UserId });
+      }
+
+      public IActionResult DeleteCourseTrainee(int Id, string userId)
+      {
+
+         var courseindb = _db.AssignTraineeCourses.SingleOrDefault(item => item.CourseId == Id && item.UserId == userId);
+         _db.AssignTraineeCourses.Remove(courseindb);
+         _db.SaveChanges();
+
+
+
+         return RedirectToAction("ViewCourseTrainee", "TrainingStaffs", new { id = userId });
       }
 
 
