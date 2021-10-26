@@ -1,0 +1,34 @@
+﻿@model ICollection<AppDevGCD0805.Models.AssignTraineeCourse>
+@{
+  ViewBag.Title = "View Course";
+}
+
+<h2>Course</h2>
+
+@ViewBag.user.FullName
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Category</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var item in Model)
+    {
+    <tr>
+
+      <td>@item.Course.Name</td>
+      <td>@item.Course.Description</td>
+      <td>@item.Course.Category.Name</td>
+
+      <td>@Html.ActionLink("Delete", "DeleteCourseTrainee", "TrainingStaffs", new { id = item.CourseId, userId = item.UserId }, new { @class = "btn btn-danger" })</td>
+
+    </tr>
+    }
+
+  </tbody>
+</table>

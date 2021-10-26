@@ -1,0 +1,28 @@
+﻿@model ICollection<AppDevGCD0805.Models.TraineeProfile>
+  @{
+    ViewBag.Title = "View Trainee";
+  }
+
+  <h2>Trainees in Course</h2>
+
+
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+
+        <th scope="col">Name</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var item in Model)
+      {
+        <tr>
+          <td>@item.User.FullName</td>
+
+        </tr>
+      }
+
+    </tbody>
+  </table>

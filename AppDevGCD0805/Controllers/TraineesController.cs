@@ -1,5 +1,6 @@
 ﻿using AppDevGCD0805.Data;
 using AppDevGCD0805.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,8 @@ using System.Threading.Tasks;
 
 namespace AppDevGCD0805.Controllers
 {
-	public class TraineesController : Controller
+   [Authorize(Roles = "Trainee")]
+   public class TraineesController : Controller
 	{
 
       private ApplicationDbContext _db;
@@ -25,6 +27,7 @@ namespace AppDevGCD0805.Controllers
 
       }
       // GET: Trainees
+      
       [HttpGet]
       public ActionResult Index()
       {
@@ -44,6 +47,13 @@ namespace AppDevGCD0805.Controllers
          return View(courseinDb);
       }
 
-      
+      public ActionResult ViewTrainees(int id)
+      {
+         var query = _db.TraineeProfiles.Include(x => x.AssignTraineeCourses).Include(x => x.User).AsQueryable();
+
+         var traineeinDb = query.Where(x => x.AssignTraineeCourses.Where(x => x.CourseId == id).Any()).ToList();
+
+         return View(traineeinDb);
+      }
    }
 }

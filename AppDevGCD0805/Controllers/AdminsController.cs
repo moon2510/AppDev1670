@@ -1,6 +1,7 @@
 ﻿using AppDevGCD0805.Data;
 using AppDevGCD0805.Models;
 using AppDevGCD0805.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,8 @@ using System.Threading.Tasks;
 
 namespace AppDevGCD0805.Controllers
 {
-    public class AdminsController : Controller
+   [Authorize(Roles = "Admin")]
+   public class AdminsController : Controller
     {
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
