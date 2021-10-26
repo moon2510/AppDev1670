@@ -81,23 +81,23 @@ namespace AppDevGCD0805.Controllers
 
             return View(todoInDb);
         }
-      [HttpPost]
-      public ActionResult Edit(TraineeProfile traineeProfile)
-      {
+        [HttpPost]
+        public ActionResult Edit(TraineeProfile traineeProfile)
+        {
 
-         var traineeinDb = _db.TraineeProfiles.Include(x => x.User).SingleOrDefault(x => x.UserId == traineeProfile.User.Id);
-         var user = _db.Users.SingleOrDefault(x => x.Id == traineeProfile.User.Id);
-         user.FullName = traineeProfile.User.FullName;
-         user.Address = traineeProfile.User.Address;
-         user.Age = traineeProfile.User.Age;
-         traineeinDb.DateOfBirth = traineeProfile.DateOfBirth;
-         traineeProfile.Education = traineeProfile.Education;
+           var traineeinDb = _db.TraineeProfiles.Include(x => x.User).SingleOrDefault(x => x.UserId == traineeProfile.User.Id);
+           var user = _db.Users.SingleOrDefault(x => x.Id == traineeProfile.User.Id);
+           user.FullName = traineeProfile.User.FullName;
+           user.Address = traineeProfile.User.Address;
+           user.Age = traineeProfile.User.Age;
+           traineeinDb.DateOfBirth = traineeProfile.DateOfBirth;
+           traineeProfile.Education = traineeProfile.Education;
 
-         _db.SaveChanges();
+           _db.SaveChanges();
 
-         return RedirectToAction("ManageTrainee");
-      }
-      public ActionResult SearchTrainee(string searchString, int age)
+           return RedirectToAction("ManageTrainee");
+        }
+        public ActionResult SearchTrainee(string searchString, int age)
         {
             var trainees = _db.TraineeProfiles.Include(x => x.User);
                         
@@ -121,23 +121,25 @@ namespace AppDevGCD0805.Controllers
             }
             return RedirectToAction("ManageTrainee");
 
-      }
+        }
       
-      public ActionResult AssignTrainer(string id)
-      {
-         var model = new AssignTrainerCourse() { UserId=id };
-         var trainers = _db.Users.SingleOrDefault(x => x.Id == id);
-         ViewBag.User = trainers.FullName;
+       
 
-         var course = _db.Courses.ToList();
-         var courseList = _db.Courses.Select(x => new { x.Id, x.Name }).ToList();
+        public ActionResult AssignTrainer(string id)
+        {
+           var model = new AssignTrainerCourse() { UserId=id };
+           var trainers = _db.Users.SingleOrDefault(x => x.Id == id);
+           ViewBag.User = trainers.FullName;
 
-         ViewBag.CourseList = new SelectList(courseList, "Id", "Name");
+           var course = _db.Courses.ToList();
+           var courseList = _db.Courses.Select(x => new { x.Id, x.Name }).ToList();
+
+           ViewBag.CourseList = new SelectList(courseList, "Id", "Name");
 
 
-         return View(model);
+           return View(model);
 
-      }
+        }
 
       public ActionResult ViewCourseTrainer(string id)
       {
@@ -204,19 +206,8 @@ namespace AppDevGCD0805.Controllers
          _db.SaveChanges();
          //return RedirectToAction("ViewCourse","Trainers", new {id = assignTrainerCourse.UserId });
 
-         return RedirectToAction("ViewCourseTrainee", "TrainingStaffs", new { id = assignTraineeCourse.UserId });
       }
 
-      public IActionResult DeleteCourseTrainee(int Id, string userId)
-      {
 
-         var courseindb = _db.AssignTraineeCourses.SingleOrDefault(item => item.CourseId == Id && item.UserId == userId);
-         _db.AssignTraineeCourses.Remove(courseindb);
-         _db.SaveChanges();
-
-
-
-         return RedirectToAction("ViewCourseTrainee", "TrainingStaffs", new { id = userId });
-      }
    }
 }

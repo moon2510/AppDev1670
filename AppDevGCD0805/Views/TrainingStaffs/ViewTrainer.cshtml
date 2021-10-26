@@ -1,0 +1,37 @@
+﻿
+@model IEnumerable<AppDevGCD0805.Models.TrainerProfile>
+
+<h1>Trainer account</h1>
+<main>
+    
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+
+                <th scope="col">Full Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Specialty</th>
+                <th scope="col">Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+             {
+                <tr>
+
+                    <td>@item.User.FullName</td>      
+                    <td>@item.User.Email</td>
+                    <td>@item.Specialty</td>
+                    <td>
+                        @Html.ActionLink(" Assign", "AssignTrainer", "TrainingStaffs", new { Id = item.User.Id }, new { @class = "btn btn-outline-info fas fa-chalkboard-teacher" })
+                    </td>
+                </tr>
+             }
+        </tbody>
+
+    </table>
+
+
+</main>
+
