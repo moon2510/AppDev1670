@@ -83,8 +83,15 @@
         <div class="card border-secondary mb-3">
             <div class="card-header">View Trainer/Trainee in Course.</div>
             <div class="card-body text-secondary">
-                <p class="card-text">Click the button below to view.</p>
-                <a class="nav-link btn btn-outline-secondary" asp-controller="TrainingStaffs" asp-action="ViewUserInCourse">View</a>
+                <form asp-controller="TrainingStaffs" asp-action="SearchCourse" method="post">
+                    <div class="input-group ">
+                        <input class="form-control mr-sm-2 " type="text" placeholder="Search by course " aria-label="Search" name="SearchString">
+                        <input class="form-control mr-sm-2 " type="text" placeholder="Trainer/Trainee " aria-label="Search" name="role">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

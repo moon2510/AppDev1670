@@ -237,27 +237,34 @@ namespace AppDevGCD0805.Controllers
 
         public ActionResult TraineeInCourse(int id)
         {
-            var traineeInCourse = _db.AssignTraineeCourses.Include(x => x.Course).Include(x => x.TraineeProfile).ThenInclude(x => x.User).Where(x =>x.CourseId == id);
-            Models.Course course = _db.Courses.SingleOrDefault(x => x.Id == id);
-            ViewBag.Course = course.Name;
-            return View(traineeInCourse);
+            var coursesTrainee = _db.AssignTraineeCourses.Include(x => x.Course).Include(x => x.TraineeProfile).ThenInclude(x => x.User);
+            return View(coursesTrainee);
         }
-        public ActionResult SearchCourse(string searchString)
+        public ActionResult SearchCourse(string searchString, string role)
         {
-            var courses = _db.AssignTrainerCourses.Include(x =>x.Course).Include(x => x.TrainerProfile).ThenInclude(x =>x.User);
-
-
+            var coursesTrainer = _db.AssignTrainerCourses.Include(x => x.Course).Include(x => x.TrainerProfile).ThenInclude(x => x.User);
             if (!String.IsNullOrEmpty(searchString))
             {
-                var result = courses.Where(s => s.Course.Name.Contains(searchString));
+                if( role == "trainer")
+                {
+                    var result = coursesTrainer.Where(s => s.Course.Name.Contains(searchString));
+                    
+                    return View(result.ToList());
+                }
+                else if (role == "trainee")
+                {
+                    return RedirectToAction("TraineeInCourse");
+                }
 
-                return View(result.ToList());
+                return RedirectToAction("SearchEror");
             }
-
-           
-            return RedirectToAction("ViewUserInCourse");
+            return RedirectToAction("SearchEror");
 
         }
+        public ActionResult SearchEror()
+        {
+            return View();
+        }
 
-    }
+   }
 }
