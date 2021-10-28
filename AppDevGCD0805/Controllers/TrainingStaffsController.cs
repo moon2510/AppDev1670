@@ -18,7 +18,7 @@ namespace AppDevGCD0805.Controllers
 {
    [Authorize(Roles = "Staff")]
    public class TrainingStaffsController : Controller
-    {
+   {
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
@@ -123,21 +123,20 @@ namespace AppDevGCD0805.Controllers
             return RedirectToAction("ManageTrainee");
 
         }
-         public IActionResult ViewTrainer()
-         {
-            var trainerinDB = _db.TrainerProfiles.Include(x => x.User).ToList();
-
-            return View(trainerinDB);
-         }
-
+        public IActionResult ViewTrainer()
+        {
+           var trainerinDB = _db.TrainerProfiles.Include(x => x.User).ToList();
+           return View(trainerinDB);
+        }
 
 
-      public ActionResult AssignTrainer(string id)
+
+        public ActionResult AssignTrainer(string id)
         {
            var model = new AssignTrainerCourse() { UserId=id };
            var trainers = _db.Users.SingleOrDefault(x => x.Id == id);
            ViewBag.User = trainers.FullName;
-
+         
            var course = _db.Courses.ToList();
            var courseList = _db.Courses.Select(x => new { x.Id, x.Name }).ToList();
 
@@ -149,88 +148,125 @@ namespace AppDevGCD0805.Controllers
         }
 
       
-      [HttpPost]
-      public ActionResult AssignTrainer(AssignTrainerCourse assignTrainerCourse)
-      {
-         _db.AssignTrainerCourses.Add(assignTrainerCourse);
-         _db.SaveChanges();
-         //return RedirectToAction("ViewCourse","Trainers", new {id = assignTrainerCourse.UserId });
+        [HttpPost]
+        public ActionResult AssignTrainer(AssignTrainerCourse assignTrainerCourse)
+        {
+           _db.AssignTrainerCourses.Add(assignTrainerCourse);
+           _db.SaveChanges();
+           //return RedirectToAction("ViewCourse","Trainers", new {id = assignTrainerCourse.UserId });
 
-         return RedirectToAction("ViewCourseTrainer","TrainingStaffs", new { id = assignTrainerCourse.UserId });
-      }
+           return RedirectToAction("ViewCourseTrainer","TrainingStaffs", new { id = assignTrainerCourse.UserId });
+        }
 
-      public ActionResult ViewCourseTrainer(string id)
-      {
+        public ActionResult ViewCourseTrainer(string id)
+        {
 
-         var courseinDb = _db.AssignTrainerCourses.Include(x => x.Course).ThenInclude(x => x.Category)
-            .Where(x => x.UserId == id).ToList();
+           var courseinDb = _db.AssignTrainerCourses.Include(x => x.Course).ThenInclude(x => x.Category)
+              .Where(x => x.UserId == id).ToList();
 
-         ViewBag.user = _db.Users.SingleOrDefault(x => x.Id == id);
+           ViewBag.user = _db.Users.SingleOrDefault(x => x.Id == id);
 
-         return View(courseinDb);
-      }
+           return View(courseinDb);
+        }
 
-      public IActionResult DeleteCourseTrainer(int Id, string userId)
-      {
+        public IActionResult DeleteCourseTrainer(int Id, string userId)
+        {
 
-         var courseindb = _db.AssignTrainerCourses.SingleOrDefault(item => item.CourseId == Id && item.UserId==userId);
-         _db.AssignTrainerCourses.Remove(courseindb);
-         _db.SaveChanges();
+           var courseindb = _db.AssignTrainerCourses.SingleOrDefault(item => item.CourseId == Id && item.UserId==userId);
+           _db.AssignTrainerCourses.Remove(courseindb);
+           _db.SaveChanges();
+           return RedirectToAction("ViewCourseTrainer", "TrainingStaffs", new { id = userId });
+        }
+
+        public IActionResult ViewTrainee()
+        {
+            var traineeinDB = _db.TraineeProfiles.Include(x => x.User).ToList();
+
+            return View(traineeinDB);
+        }
+        public ActionResult AssignTrainee(string id)
+        {
+           var model = new AssignTraineeCourse() { UserId = id };
+           var trainees = _db.Users.SingleOrDefault(x => x.Id == id);
+           ViewBag.User = trainees.FullName;
+
+           var course = _db.Courses.ToList();
+           var courseList = _db.Courses.Select(x => new { x.Id, x.Name }).ToList();
+
+           ViewBag.CourseList = new SelectList(courseList, "Id", "Name");
 
 
+           return View(model);
 
-         return RedirectToAction("ViewCourseTrainer", "TrainingStaffs", new { id = userId });
-      }
+        }
+        public ActionResult ViewCourseTrainee(string id)
+        {
 
+           var courseinDb = _db.AssignTraineeCourses.Include(x => x.Course).ThenInclude(x => x.Category)
+              .Where(x => x.UserId == id).ToList();
 
-      public ActionResult AssignTrainee(string id)
-      {
-         var model = new AssignTraineeCourse() { UserId = id };
-         var trainees = _db.Users.SingleOrDefault(x => x.Id == id);
-         ViewBag.User = trainees.FullName;
+           ViewBag.user = _db.Users.SingleOrDefault(x => x.Id == id);
 
-         var course = _db.Courses.ToList();
-         var courseList = _db.Courses.Select(x => new { x.Id, x.Name }).ToList();
-
-         ViewBag.CourseList = new SelectList(courseList, "Id", "Name");
-
-
-         return View(model);
-
-      }
-      public ActionResult ViewCourseTrainee(string id)
-      {
-
-         var courseinDb = _db.AssignTraineeCourses.Include(x => x.Course).ThenInclude(x => x.Category)
-            .Where(x => x.UserId == id).ToList();
-
-         ViewBag.user = _db.Users.SingleOrDefault(x => x.Id == id);
-
-         return View(courseinDb);
-      }
+           return View(courseinDb);
+        }
       
-      [HttpPost]
-      public ActionResult AssignTrainee(AssignTraineeCourse assignTraineeCourse)
-      {
-         _db.AssignTraineeCourses.Add(assignTraineeCourse);
-         _db.SaveChanges();
-         //return RedirectToAction("ViewCourse","Trainers", new {id = assignTrainerCourse.UserId });
+        [HttpPost]
+        public ActionResult AssignTrainee(AssignTraineeCourse assignTraineeCourse)
+        {
+           _db.AssignTraineeCourses.Add(assignTraineeCourse);
+           _db.SaveChanges();
+           //return RedirectToAction("ViewCourse","Trainers", new {id = assignTrainerCourse.UserId });
 
-         return RedirectToAction("ViewCourseTrainee", "TrainingStaffs", new { id = assignTraineeCourse.UserId });
-      }
+           return RedirectToAction("ViewCourseTrainee", "TrainingStaffs", new { id = assignTraineeCourse.UserId });
+        }
 
-      public IActionResult DeleteCourseTrainee(int Id, string userId)
-      {
+        public IActionResult DeleteCourseTrainee(int Id, string userId)
+        {
 
-         var courseindb = _db.AssignTraineeCourses.SingleOrDefault(item => item.CourseId == Id && item.UserId == userId);
-         _db.AssignTraineeCourses.Remove(courseindb);
-         _db.SaveChanges();
+           var courseindb = _db.AssignTraineeCourses.SingleOrDefault(item => item.CourseId == Id && item.UserId == userId);
+           _db.AssignTraineeCourses.Remove(courseindb);
+           _db.SaveChanges();
+
+           return RedirectToAction("ViewCourseTrainee", "TrainingStaffs", new { id = userId });
+        }
+        public ActionResult ViewUserInCourse()
+        {
+            var courses = _db.AssignTrainerCourses.Include(x => x.Course).Include(x => x.TrainerProfile).ThenInclude(x =>x.User).ToList(); 
+            return View(courses);
+        }
+
+        public ActionResult TraineeInCourse(int id)
+        {
+            var traineeInCourse = _db.AssignTraineeCourses.Include(x => x.Course).Include(x => x.TraineeProfile).ThenInclude(x => x.User).ToList();
+            Models.Course course = _db.Courses.SingleOrDefault(x => x.Id == id);
+            ViewBag.Course = course.Name;
+            return View(traineeInCourse);
+        }
+        public ActionResult SearchCourse(string searchString, string category)
+        {
+            var courses = _db.Courses.Include(x => x.Name);
 
 
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var result = courses.Where(s => s.Name.Contains(searchString));
 
-         return RedirectToAction("ViewCourseTrainee", "TrainingStaffs", new { id = userId });
-      }
+                if (!String.IsNullOrEmpty(category))
+                {
+                    var final = result.Where(s => s.Category.Name.Contains(category));
+                    return View(final.ToList());
+                }
+                return View(result.ToList());
+            }
 
+            if (!String.IsNullOrEmpty(category))
+            {
+                var final = courses.Where(s => s.Category.Name.Contains(category));
+                return View(final.ToList());
+            }
+            return RedirectToAction("ManageTrainee");
 
-   }
+        }
+
+    }
 }

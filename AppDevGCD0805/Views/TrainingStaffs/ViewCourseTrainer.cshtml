@@ -3,14 +3,23 @@
   ViewBag.Title = "View Course";
 }
 
-<h2>Course</h2>
+<h2>Course of trainer</h2>
 
-@ViewBag.user.FullName
+
+<div class="alert alert-primary col-md-4" role="alert">
+    <h5>
+        Trainer:
+    </h5> 
+    <center> @ViewBag.user.FullName</center>
+   
+
+</div>
+<br />
 
 <table class="table">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">Name</th>
+            <th scope="col">Name of course  </th>
             <th scope="col">Description</th>
             <th scope="col">Category</th>
             <th scope="col">Action</th>

@@ -69,11 +69,22 @@
         </div>
     </div>
     <div class="col-md-6">
-        <div class="card border-primary mb-3">
-            <div class="card-header">Manage Course.</div>
-            <div class="card-body text-primary">
-                <p class="card-text">Click the button below to manage Category.</p>
-                <a class="nav-link btn btn-outline-primary" asp-controller="Courses" asp-action="Index">Manage</a>
+        <div class="card border-warning mb-3">
+            <div class="card-header">Assign Trainee.</div>
+            <div class="card-body text-warning">
+                <p class="card-text">Click the button below to assign Trainee.</p>
+                <a class="nav-link btn btn-outline-warning" asp-controller="TrainingStaffs" asp-action="ViewTrainee">Assign</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card border-secondary mb-3">
+            <div class="card-header">View Trainer/Trainee in Course.</div>
+            <div class="card-body text-secondary">
+                <p class="card-text">Click the button below to view.</p>
+                <a class="nav-link btn btn-outline-secondary" asp-controller="TrainingStaffs" asp-action="ViewUserInCourse">View</a>
             </div>
         </div>
     </div>
