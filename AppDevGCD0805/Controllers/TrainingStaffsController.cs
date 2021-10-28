@@ -237,34 +237,25 @@ namespace AppDevGCD0805.Controllers
 
         public ActionResult TraineeInCourse(int id)
         {
-            var traineeInCourse = _db.AssignTraineeCourses.Include(x => x.Course).Include(x => x.TraineeProfile).ThenInclude(x => x.User).ToList();
+            var traineeInCourse = _db.AssignTraineeCourses.Include(x => x.Course).Include(x => x.TraineeProfile).ThenInclude(x => x.User).Where(x =>x.CourseId == id);
             Models.Course course = _db.Courses.SingleOrDefault(x => x.Id == id);
             ViewBag.Course = course.Name;
             return View(traineeInCourse);
         }
-        public ActionResult SearchCourse(string searchString, string category)
+        public ActionResult SearchCourse(string searchString)
         {
-            var courses = _db.Courses.Include(x => x.Name);
+            var courses = _db.AssignTrainerCourses.Include(x =>x.Course).Include(x => x.TrainerProfile).ThenInclude(x =>x.User);
 
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                var result = courses.Where(s => s.Name.Contains(searchString));
+                var result = courses.Where(s => s.Course.Name.Contains(searchString));
 
-                if (!String.IsNullOrEmpty(category))
-                {
-                    var final = result.Where(s => s.Category.Name.Contains(category));
-                    return View(final.ToList());
-                }
                 return View(result.ToList());
             }
 
-            if (!String.IsNullOrEmpty(category))
-            {
-                var final = courses.Where(s => s.Category.Name.Contains(category));
-                return View(final.ToList());
-            }
-            return RedirectToAction("ManageTrainee");
+           
+            return RedirectToAction("ViewUserInCourse");
 
         }
 
