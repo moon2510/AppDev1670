@@ -10,7 +10,6 @@
 
                 <th scope="col">Full Name</th>
                 <th scope="col">Email</th>
-                <th scope="col">Specialty</th>
                 <th scope="col">Action</th>
 
             </tr>
@@ -22,7 +21,7 @@
 
                     <td>@item.User.FullName</td>
                     <td>@item.User.Email</td>
-                    
+
                     <td>
                         @Html.ActionLink(" Assign", "AssignTrainee", "TrainingStaffs", new { Id = item.User.Id }, new { @class = "btn btn-outline-info fas fa-chalkboard-teacher" })
                     </td>
@@ -32,6 +31,6 @@
 
     </table>
 
-
+    <center><a class="nav-link btn btn-outline-primary col-3 fas fa-reply" asp-controller="TrainingStaffs" asp-action="Index">   Back to previous page</a></center>
 </main>
 

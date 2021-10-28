@@ -4,25 +4,28 @@
 
 <main>
 
-    
+
 
     <table class="table">
         <thead class="thead-dark">
             <tr>
 
                 <th scope="col">Trainee</th>
-                
+
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
-             {
+            {
                 <tr>
 
                     <td>@item.TraineeProfile.User.FullName</td>
                 </tr>
-             }
+            }
 
         </tbody>
     </table>
+    <br />
+    <br />
+    <center><a class="nav-link btn btn-outline-primary col-3 fas fa-reply" asp-controller="TrainingStaffs" asp-action="ViewUserInCourse">   Back to previous page</a></center>
 </main>
