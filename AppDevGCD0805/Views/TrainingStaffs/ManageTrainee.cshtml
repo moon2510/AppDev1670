@@ -2,7 +2,7 @@
 @model IEnumerable<AppDevGCD0805.Models.TraineeProfile>
 
 <h1>Trainee account</h1>
-<main>  
+<main>
     <form asp-controller="TrainingStaffs" asp-action="SearchTrainee" method="post">
         <div class="input-group col-md-6">
             <input class="form-control mr-sm-2 col-md-4" type="text" placeholder="Search by name" aria-label="Search" name="SearchString">
@@ -50,7 +50,7 @@
             }
         </tbody>
     </table>
-
-
+    <center><a class="nav-link btn btn-outline-primary col-3 fas fa-reply" asp-controller="TrainingStaffs" asp-action="Index">   Back to previous page</a></center>
+    
 </main>
 
