@@ -16,7 +16,9 @@
     </div>
     <div class="form-group">
         <label>Password</label>
-        <input type="password" class="form-control" placeholder="Input Password" asp-for="User.PasswordHash">
+        <input type="password" class="form-control" placeholder="Input Password" asp-for="User.PasswordHash"  id="myInput">
+        <br />
+        <input type="checkbox" onclick="myFunction()">Show Password
     </div>
     <div class="form-group">
         <label>Age</label>
@@ -38,4 +40,7 @@
         <input type="text" class="form-control" placeholder="Input Education" asp-for="Education">
     </div>
     <button type="submit" class="btn btn-outline-success">Create</button>
+
 </form>
+
+

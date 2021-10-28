@@ -1,0 +1,28 @@
+﻿@model IEnumerable<AppDevGCD0805.Models.AssignTraineeCourse>
+
+<h1>Trainee in @ViewBag.Course </h1>
+
+<main>
+
+    
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+
+                <th scope="col">Trainee</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+             {
+                <tr>
+
+                    <td>@item.TraineeProfile.User.FullName</td>
+                </tr>
+             }
+
+        </tbody>
+    </table>
+</main>
