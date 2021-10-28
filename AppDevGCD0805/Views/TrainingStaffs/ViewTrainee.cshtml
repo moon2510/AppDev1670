@@ -1,7 +1,7 @@
 ﻿
 @model IEnumerable<AppDevGCD0805.Models.TraineeProfile>
 
-<h1>Trainer account</h1>
+<h1>Trainee account</h1>
 <main>
 
     <table class="table">
@@ -17,15 +17,17 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+          <tr>
 
-                    <td>@item.User.FullName</td>
-                    <td>@item.User.Email</td>
+            <td>@item.User.FullName</td>
+            <td>@item.User.Email</td>
 
-                    <td>
-                        @Html.ActionLink(" Assign", "AssignTrainee", "TrainingStaffs", new { Id = item.User.Id }, new { @class = "btn btn-outline-info fas fa-chalkboard-teacher" })
-                    </td>
-                </tr>
+            <td>
+              @Html.ActionLink(" Assign", "AssignTrainee", "TrainingStaffs", new { Id = item.User.Id }, new { @class = "btn btn-outline-info fas fa-chalkboard-teacher" })
+
+              @Html.ActionLink("About Course", "ViewCourseTrainee", "TrainingStaffs", new { Id = item.User.Id }, new { @class = "btn btn-outline-secondary fas fa-chalkboard" })
+            </td>
+          </tr>
             }
         </tbody>
 
