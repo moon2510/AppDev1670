@@ -235,14 +235,15 @@ namespace AppDevGCD0805.Controllers
             return View(courses);
         }
 
-        public ActionResult TraineeInCourse(int id)
+        public ActionResult TraineeInCourse(string searchString, string role)
         {
-            var coursesTrainee = _db.AssignTraineeCourses.Include(x => x.Course).Include(x => x.TraineeProfile).ThenInclude(x => x.User);
-            return View(coursesTrainee);
+                return View();
         }
         public ActionResult SearchCourse(string searchString, string role)
         {
             var coursesTrainer = _db.AssignTrainerCourses.Include(x => x.Course).Include(x => x.TrainerProfile).ThenInclude(x => x.User);
+            var coursesTrainee = _db.AssignTraineeCourses.Include(x => x.Course).Include(x => x.TraineeProfile).ThenInclude(x => x.User);
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 if( role == "trainer")
@@ -253,7 +254,8 @@ namespace AppDevGCD0805.Controllers
                 }
                 else if (role == "trainee")
                 {
-                    return RedirectToAction("TraineeInCourse");
+                    var result = coursesTrainee.Where(s => s.Course.Name.ToLower().Contains(searchString.ToLower()));
+                    return View("TraineeInCourse",result);
                 }
 
                 return RedirectToAction("SearchEror");
