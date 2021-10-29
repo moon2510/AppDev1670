@@ -4,14 +4,16 @@ using AppDevGCD0805.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AppDevGCD0805.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211029042353_dbInit")]
+    partial class dbInit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -198,34 +200,34 @@ namespace AppDevGCD0805.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fd8c7de0-17aa-4e12-a14e-b96a30a84280",
+                            Id = "e056df3b-9d9d-47cf-8ec7-0b336fef6d62",
                             AccessFailedCount = 0,
                             Age = 0,
-                            ConcurrencyStamp = "4d29004a-add5-438b-8f76-d8163f4347de",
+                            ConcurrencyStamp = "b5e94219-448f-46da-b185-2c333840fe6c",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Le Trung Kien",
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEI/II67lcfMZMSRqS71vXDNSpM3Zd//T2Yycc6fwTqU1felqBs0tC4S8G9zAq7Zocg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI6CQXkhgHQz1fMYX7gNhoGhHQsOw7uUBOarFfvhaZaMSHgiCZqFmF/nkYmZqwL5jg==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "c994c603-8c8e-474e-ad75-b1e6b0275e46",
+                            SecurityStamp = "812ae9e4-a21b-415d-8af7-ca42690b6b66",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
                         new
                         {
-                            Id = "bce98df9-7ad0-4b92-8ff4-2dd83e09035b",
+                            Id = "7f9f3eee-aa35-48e4-8b49-f0dd83bfb3fe",
                             AccessFailedCount = 0,
                             Age = 0,
-                            ConcurrencyStamp = "64e3d21a-846e-456d-8359-78c275a8e089",
+                            ConcurrencyStamp = "ad60b669-2394-4f13-bc7d-77628d5fa659",
                             Email = "staff@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Le Tran Thai Tuan",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEAXWzl6ST3DTDD2TYC2kA9cauCkahCPKG4BLdz1L/Ili7luylZX1BFIH4pyNzXsaAQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKq6BGCf0aWboZqxpt4IW9iHK53BD6kdiGMOeveKGfvmPEELKfpaS/4izrdI3Lq/og==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "9db1d1d3-f51f-41a6-9a89-7166dcd8ada0",
+                            SecurityStamp = "b038ec0f-7195-4f82-a3c1-a4705ed1f6a6",
                             TwoFactorEnabled = false,
                             UserName = "staff@gmail.com"
                         });
@@ -260,29 +262,29 @@ namespace AppDevGCD0805.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "45376bb7-bd5b-4b5c-9a44-a40a2b4a6887",
-                            ConcurrencyStamp = "89f9c5fa-5644-4c01-954a-a278cd01968a",
+                            Id = "fe40dc5e-d957-4c4f-8f9d-6eaac51b92c4",
+                            ConcurrencyStamp = "c8360899-dc4a-4192-a191-961ea3933063",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "d6cd0dc4-2fb8-437f-a7fe-b35c81600817",
-                            ConcurrencyStamp = "c4d42cd0-d9b6-46a2-91c3-87439783dc80",
+                            Id = "75308cff-7fe7-4955-9382-8b1608a71be2",
+                            ConcurrencyStamp = "5cad7d42-34b9-410c-a01a-a20acb0a67f9",
                             Name = "Staff",
                             NormalizedName = "STAFF"
                         },
                         new
                         {
-                            Id = "e1503004-408d-4394-8086-f4658718e68d",
-                            ConcurrencyStamp = "dd5a66c3-428d-4bfc-8c5a-055b4b26b088",
+                            Id = "b4cc717f-30da-4809-aa77-f4fdd71a6ea5",
+                            ConcurrencyStamp = "839191ac-be4a-4ec8-ad81-911400173091",
                             Name = "Trainer",
                             NormalizedName = "TRAINER"
                         },
                         new
                         {
-                            Id = "15b82ac8-650a-40d3-a585-27057fb78449",
-                            ConcurrencyStamp = "71837aa2-3651-4321-96cc-3824edd8cfd2",
+                            Id = "50eecd0e-cef3-46b8-85e8-a70fba8aaab7",
+                            ConcurrencyStamp = "3b47a533-9b41-4c12-993a-ebc60d483f95",
                             Name = "Trainee",
                             NormalizedName = "TRAINEE"
                         });
@@ -375,13 +377,13 @@ namespace AppDevGCD0805.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "fd8c7de0-17aa-4e12-a14e-b96a30a84280",
-                            RoleId = "45376bb7-bd5b-4b5c-9a44-a40a2b4a6887"
+                            UserId = "e056df3b-9d9d-47cf-8ec7-0b336fef6d62",
+                            RoleId = "fe40dc5e-d957-4c4f-8f9d-6eaac51b92c4"
                         },
                         new
                         {
-                            UserId = "bce98df9-7ad0-4b92-8ff4-2dd83e09035b",
-                            RoleId = "d6cd0dc4-2fb8-437f-a7fe-b35c81600817"
+                            UserId = "7f9f3eee-aa35-48e4-8b49-f0dd83bfb3fe",
+                            RoleId = "75308cff-7fe7-4955-9382-8b1608a71be2"
                         });
                 });
 
