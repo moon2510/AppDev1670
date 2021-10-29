@@ -89,11 +89,7 @@ namespace AppDevGCD0805.Controllers
         {
             if (!ModelState.IsValid) return View(user);
 
-            if (_userManager.FindByEmailAsync(user.Email).GetAwaiter().GetResult() != null)
-            {
-                TempData["Danger"] = "The email address is already registered";
-                return View(new User());
-            }
+            
             if (!ModelState.IsValid) return View(user);
             var staffinDb = _db.Users.SingleOrDefault(item => item.Id == user.Id);
             staffinDb.FullName = user.FullName;
