@@ -43,6 +43,13 @@ namespace AppDevGCD0805.Controllers
         [HttpPost]
         public IActionResult CreateTrainee(TraineeProfile traineeProfile)
         {
+            if (!ModelState.IsValid) return View(traineeProfile);
+
+            if (_userManager.FindByEmailAsync(traineeProfile.User.Email).GetAwaiter().GetResult() != null)
+            {
+                TempData["Danger"] = "The email address is already registered";
+                return View(new User());
+            }
             var user = traineeProfile.User;
             user.UserName = user.Email;
             IdentityResult result = _userManager.CreateAsync(user, user.PasswordHash).GetAwaiter().GetResult();
