@@ -116,7 +116,7 @@ namespace AppDevGCD0805.Controllers
             if (_userManager.FindByEmailAsync(trainerProfile.User.Email).GetAwaiter().GetResult() != null)
             {
                 TempData["Danger"] = "The email address is already registered";
-                return View(new User());
+                return View(new TrainerProfile());
             }
             var user = trainerProfile.User;
             user.UserName = user.Email;
