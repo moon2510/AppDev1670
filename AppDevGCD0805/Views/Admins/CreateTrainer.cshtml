@@ -4,36 +4,47 @@
 
 
 <h1>Create Trainer</h1>
-
+@if (TempData["Danger"] != null)
+{
+    <div class="alert alert-danger alert-dismissable">
+        <strong>@TempData["Danger"]</strong>
+    </div>
+}
 <form asp-controller="Admins" asp-action="CreateTrainer" method="post">
-  <div class="form-group">
-    <label>Full Name</label>
-    <input type="text" class="form-control" placeholder="Input full name" asp-for="User.FullName">
-  </div>
-  <div class="form-group">
-    <label>Email</label>
-    <input type="text" class="form-control" placeholder="Input Email" asp-for="User.Email">
-  </div>
-  <div class="form-group">
-      <label>Password</label>
-      <input type="password" class="form-control" placeholder="Input Password" asp-for="User.PasswordHash" id="myInput">
-      <input type="checkbox" onclick="myFunction()">Show Password
-  </div>
-  <div class="form-group">
-    <label>Age</label>
-    <input type="text" class="form-control" placeholder="Input age" asp-for="User.Age">
-  </div>
+    <div class="form-group">
+        <label>Full Name</label>
+        <input required type="text" class="form-control" placeholder="Input full name" asp-for="User.FullName">
+        <span asp-validation-for="User.FullName" class="text-danger"></span>
 
-  <div class="form-group">
-    <label>Address</label>
-    <input type="text" class="form-control" placeholder="Input Address" asp-for="User.Address">
-  </div>
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input required type="email" class="form-control" placeholder="Input Email" asp-for="User.Email">
+        <span asp-validation-for="User.Email" class="text-danger"></span>
 
-  <div class="form-group">
-    <label>Specialty</label>
-    <input type="text" class="form-control" placeholder="Input Specialty" asp-for="Specialty">
-  </div>
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input required type="password" class="form-control" placeholder="Input Password" asp-for="User.PasswordHash" id="myInput">
+        <input type="checkbox" onclick="myFunction()">Show Password
+    </div>
+    <div class="form-group">
+        <label>Age</label>
+        <input type="text" class="form-control" placeholder="Input age" asp-for="User.Age">
+    </div>
 
-  <button type="submit" class="btn btn-outline-success">Create</button>
+    <div class="form-group">
+        <label>Address</label>
+        <input type="text" class="form-control" placeholder="Input Address" asp-for="User.Address">
+    </div>
+
+    <div class="form-group">
+        <label>Specialty</label>
+        <input type="text" class="form-control" placeholder="Input Specialty" asp-for="Specialty">
+        <span asp-validation-for="Specialty" class="text-danger"></span>
+
+    </div>
+
+    <button type="submit" class="btn btn-outline-success">Create</button>
 </form>
 <center><a class="nav-link btn btn-outline-primary col-3 fas fa-reply" asp-controller="Admins" asp-action="Index">   Back to previous page</a></center>

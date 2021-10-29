@@ -16,6 +16,7 @@ namespace AppDevGCD0805.Models
 		public User User { get; set; }
 
 		public ICollection<AssignTrainerCourse> AssignTrainerCourses { get; set; }
+		[Required(ErrorMessage = "This field is required")]
 		public string Specialty { get; set; }
 		
 

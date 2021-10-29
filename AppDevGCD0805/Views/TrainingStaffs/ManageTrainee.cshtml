@@ -2,6 +2,9 @@
 @model IEnumerable<AppDevGCD0805.Models.TraineeProfile>
 
 <h1>Trainee account</h1>
+<div class="col-12 text-right">
+    <a class="btn btn-primary btn-sm" asp-action="CreateTrainee"><i class="fas fa-plus"></i> &nbsp; New Trainee</a>
+</div>
 <main>
     <form asp-controller="TrainingStaffs" asp-action="SearchTrainee" method="post">
         <div class="input-group col-md-6">

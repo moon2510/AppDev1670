@@ -40,7 +40,15 @@ namespace AppDevGCD0805.Controllers
         [HttpPost]
         public IActionResult CreateStaff(User user)
         {
+            if (!ModelState.IsValid) return View(user);
+            
+            if (_userManager.FindByEmailAsync(user.Email).GetAwaiter().GetResult()!=null)
+            {
+                TempData["Danger"] = "The email address is already registered";
+                return View(new User());
+            }
             user.UserName = user.Email;
+            
             IdentityResult result = _userManager.CreateAsync(user, user.PasswordHash).GetAwaiter().GetResult();
 
             if (result.Succeeded)
@@ -79,6 +87,10 @@ namespace AppDevGCD0805.Controllers
         [HttpPost]
         public ActionResult EditStaff(User user)
         {
+            if (!ModelState.IsValid) return View(user);
+
+            
+            if (!ModelState.IsValid) return View(user);
             var staffinDb = _db.Users.SingleOrDefault(item => item.Id == user.Id);
             staffinDb.FullName = user.FullName;
             staffinDb.Address = user.Address;
@@ -98,6 +110,14 @@ namespace AppDevGCD0805.Controllers
         [HttpPost]
         public IActionResult CreateTrainer(TrainerProfile trainerProfile)
         {
+
+            if (!ModelState.IsValid) return View(trainerProfile);
+
+            if (_userManager.FindByEmailAsync(trainerProfile.User.Email).GetAwaiter().GetResult() != null)
+            {
+                TempData["Danger"] = "The email address is already registered";
+                return View(new TrainerProfile());
+            }
             var user = trainerProfile.User;
             user.UserName = user.Email;
             IdentityResult result = _userManager.CreateAsync(user, user.PasswordHash).GetAwaiter().GetResult();
