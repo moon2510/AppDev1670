@@ -43,6 +43,13 @@ namespace AppDevGCD0805.Controllers
         [HttpPost]
         public IActionResult CreateTrainee(TraineeProfile traineeProfile)
         {
+            if (!ModelState.IsValid) return View(traineeProfile);
+
+            if (_userManager.FindByEmailAsync(traineeProfile.User.Email).GetAwaiter().GetResult() != null)
+            {
+                TempData["Danger"] = "The email address is already registered";
+                return View(new TraineeProfile());
+            }
             var user = traineeProfile.User;
             user.UserName = user.Email;
             IdentityResult result = _userManager.CreateAsync(user, user.PasswordHash).GetAwaiter().GetResult();
@@ -151,6 +158,11 @@ namespace AppDevGCD0805.Controllers
         [HttpPost]
         public ActionResult AssignTrainer(AssignTrainerCourse assignTrainerCourse)
         {
+            if (_db.AssignTrainerCourses.Find( assignTrainerCourse.UserId, assignTrainerCourse.CourseId) != null)
+            {
+                TempData["Danger"] = "The trainer was assigned to this course";
+                return RedirectToAction("AssignTrainer",new { id=assignTrainerCourse.UserId});
+            };
            _db.AssignTrainerCourses.Add(assignTrainerCourse);
            _db.SaveChanges();
            //return RedirectToAction("ViewCourse","Trainers", new {id = assignTrainerCourse.UserId });
@@ -213,7 +225,12 @@ namespace AppDevGCD0805.Controllers
         [HttpPost]
         public ActionResult AssignTrainee(AssignTraineeCourse assignTraineeCourse)
         {
-           _db.AssignTraineeCourses.Add(assignTraineeCourse);
+            if (_db.AssignTraineeCourses.Find(assignTraineeCourse.UserId, assignTraineeCourse.CourseId) != null)
+            {
+                TempData["Danger"] = "The trainee was assigned to this course";
+                return RedirectToAction("AssignTrainee", new { id = assignTraineeCourse.UserId });
+            };
+            _db.AssignTraineeCourses.Add(assignTraineeCourse);
            _db.SaveChanges();
            //return RedirectToAction("ViewCourse","Trainers", new {id = assignTrainerCourse.UserId });
 
@@ -235,14 +252,15 @@ namespace AppDevGCD0805.Controllers
             return View(courses);
         }
 
-        public ActionResult TraineeInCourse(int id)
+        public ActionResult TraineeInCourse(string searchString, string role)
         {
-            var coursesTrainee = _db.AssignTraineeCourses.Include(x => x.Course).Include(x => x.TraineeProfile).ThenInclude(x => x.User);
-            return View(coursesTrainee);
+                return View();
         }
         public ActionResult SearchCourse(string searchString, string role)
         {
             var coursesTrainer = _db.AssignTrainerCourses.Include(x => x.Course).Include(x => x.TrainerProfile).ThenInclude(x => x.User);
+            var coursesTrainee = _db.AssignTraineeCourses.Include(x => x.Course).Include(x => x.TraineeProfile).ThenInclude(x => x.User);
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 if( role == "trainer")
@@ -253,7 +271,8 @@ namespace AppDevGCD0805.Controllers
                 }
                 else if (role == "trainee")
                 {
-                    return RedirectToAction("TraineeInCourse");
+                    var result = coursesTrainee.Where(s => s.Course.Name.ToLower().Contains(searchString.ToLower()));
+                    return View("TraineeInCourse",result);
                 }
 
                 return RedirectToAction("SearchEror");

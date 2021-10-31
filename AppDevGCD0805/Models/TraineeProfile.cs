@@ -16,6 +16,7 @@ namespace AppDevGCD0805.Models
 		public User User { get; set; }
 
 		public DateTime DateOfBirth { get; set; }
+		[Required(ErrorMessage = "This field is required")]
 		public string Education { get; set; }
 		public ICollection<AssignTraineeCourse> AssignTraineeCourses { get; set; }
 

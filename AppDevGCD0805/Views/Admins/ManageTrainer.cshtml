@@ -2,40 +2,44 @@
 @model IEnumerable<AppDevGCD0805.Models.TrainerProfile>
 
 <h1>Trainer account</h1>
+<div class="col-12 text-right">
+    <a class="btn btn-primary btn-sm" asp-action="CreateTrainer"><i class="fas fa-plus"></i> &nbsp; New Trainer</a>
+</div>
 <main>
 
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
 
-                <th scope="col">Full Name</th>
-                <th scope="col">Address</th>
-                <th scope="col">Age</th>
-                <th scope="col">Email</th>
-                <th scope="col">User Name</th>
-                <th scope="col">Specialty</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
+        <th scope="col">Full Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Age</th>
+        <th scope="col">Email</th>
+        <th scope="col">User Name</th>
+        <th scope="col">Specialty</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var item in Model)
+      {
+        <tr>
 
-                    <td>@item.User.FullName</td>
-                    <td>@item.User.Address</td>
-                    <td>@item.User.Age</td>
-                    <td>@item.User.Email</td>
-                    <td>@item.User.UserName</td>
-                    <td>@item.Specialty</td>
-                    <td>
-                        @Html.ActionLink(" Delete", "DeleteTrainer", "Admins", new { Id = item.User.Id }, new { @class = "btn btn-outline-danger fas fa-trash-alt" })
-                        @Html.ActionLink(" Edit", "EditTrainer", "Admins", new { Id = item.User.Id }, new { @class = "btn btn-outline-info 	fas fa-edit" })
-                        @Html.ActionLink(" Change password", "ChangePassword", "Admins", new { UserId = item.User.Id }, new { @class = "btn btn-outline-warning fas fa-unlock-alt" })
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+          <td>@item.User.FullName</td>
+          <td>@item.User.Address</td>
+          <td>@item.User.Age</td>
+          <td>@item.User.Email</td>
+          <td>@item.User.UserName</td>
+          <td>@item.Specialty</td>
+          <td>
+            @Html.ActionLink(" Delete", "DeleteTrainer", "Admins", new { Id = item.User.Id }, new { @class = "btn btn-outline-danger fas fa-trash-alt" })
+            @Html.ActionLink(" Edit", "EditTrainer", "Admins", new { Id = item.User.Id }, new { @class = "btn btn-outline-info 	fas fa-edit" })
+            @Html.ActionLink(" Change password", "ChangePassword", "Admins", new { UserId = item.User.Id }, new { @class = "btn btn-outline-warning fas fa-unlock-alt" })
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+  <center><a class="nav-link btn btn-outline-primary col-3 fas fa-reply" asp-controller="Admins" asp-action="Index">   Back to previous page</a></center>
 </main>
 
