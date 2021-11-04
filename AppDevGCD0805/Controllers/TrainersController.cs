@@ -8,11 +8,13 @@ using AppDevGCD0805.Models;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AppDevGCD0805.Controllers
 {
+   [Authorize(Roles = "Trainer")]
 
-	public class TrainersController : Controller
+   public class TrainersController : Controller
 	{
       private ApplicationDbContext _db;
       private readonly UserManager<User> _userManager;
@@ -60,9 +62,18 @@ namespace AppDevGCD0805.Controllers
          return RedirectToAction("Index");
       }
 
-      public ActionResult ViewCourse()
+      public ActionResult ViewCourse(string? id)
       {
-         var userId = _userManager.GetUserId(User);
+         string userId;
+         if (id==null || id==string.Empty)
+         {
+            userId = _userManager.GetUserId(User);
+         }
+			else
+			{
+            userId = id;
+
+         }
          var courseinDb = _db.AssignTrainerCourses.Include(x => x.Course).ThenInclude(x=>x.Category)
             .Where(x=>x.UserId==userId).ToList();
 
@@ -72,7 +83,9 @@ namespace AppDevGCD0805.Controllers
       public ActionResult ViewTrainee(int id)
       {
          var query = _db.TraineeProfiles.Include(x => x.AssignTraineeCourses).Include(x => x.User).AsQueryable();
+
          var traineeinDb = query.Where(x =>x.AssignTraineeCourses.Where(x=>x.CourseId==id).Any()).ToList(); 
+
          return View(traineeinDb);
       }
    }

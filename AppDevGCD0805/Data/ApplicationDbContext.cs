@@ -31,6 +31,6 @@ namespace AppDevGCD0805.Data
 
 		public DbSet<TraineeProfile> TraineeProfiles { get; set; }
 
-		public DbSet<AssignTrainerCourse> AssignTraineeCourses { get; set; }
+		public DbSet<AssignTraineeCourse> AssignTraineeCourses { get; set; }
 	}
 }

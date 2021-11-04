@@ -1,0 +1,36 @@
+﻿@model AppDevGCD0805.Models.AssignTrainerCourse
+
+
+
+<h1>Assign Course</h1>
+@if (TempData["Danger"] != null)
+{
+    <div class="alert alert-danger alert-dismissable">
+        <strong>@TempData["Danger"]</strong>
+    </div>
+}
+<form asp-controller="TrainingStaffs" asp-action="AssignTrainer" method="post">
+    <input hidden asp-for="@Model.UserId" />
+    <div class="card col-md-7">
+
+        <div class="card-body">
+            <div class="form-group card-header">
+                <h5>Trainer : @ViewBag.User</h5>
+
+            </div>
+            <div class="form-group">
+                <label>Course</label>
+                <br />
+                @Html.DropDownListFor(model => model.CourseId, ViewBag.CourseList as SelectList,
+                          "Select Course", new { @class = "form-control col-md-5 btn btn-warning dropdown-toggle" })
+
+            </div>
+
+            <button type="submit" class="btn btn-outline-warning">Assign</button>
+
+        </div>
+    </div>
+</form>
+<br />
+
+<center><a class="nav-link btn btn-outline-primary col-3 fas fa-reply" asp-controller="TrainingStaffs" asp-action="ViewTrainer">   Back to previous page</a></center>

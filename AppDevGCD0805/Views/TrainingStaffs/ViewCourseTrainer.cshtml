@@ -1,0 +1,45 @@
+﻿@model  ICollection<AppDevGCD0805.Models.AssignTrainerCourse>
+@{
+  ViewBag.Title = "View Course";
+}
+
+<h2>Course of trainer</h2>
+
+
+<div class="alert alert-primary col-md-4" role="alert">
+    <h5>
+        Trainer:
+    </h5> 
+    <center> @ViewBag.user.FullName</center>
+   
+
+</div>
+<br />
+
+<table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name of course  </th>
+            <th scope="col">Description</th>
+            <th scope="col">Category</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+          <tr>
+            <td>@Html.ActionLink(@item.Course.Name, "ViewTrainee", "Trainers", new { id = item.CourseId }, new { @class = "btn btn-success" })</td>
+
+            <td>@item.Course.Description</td>
+            <td>@item.Course.Category.Name</td>
+
+            <td>@Html.ActionLink("Delete", "DeleteCourseTrainer", "TrainingStaffs", new { id = item.CourseId, userId = item.UserId }, new { @class = "btn btn-danger" })</td>
+
+          </tr>
+            }
+
+        </tbody>
+    </table>
+<br />
+<center><a class="nav-link btn btn-outline-primary col-3 fas fa-reply" asp-controller="TrainingStaffs" asp-action="ViewTrainer">   Back to previous page</a></center>

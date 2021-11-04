@@ -38,3 +38,61 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card border-primary mb-3">
+            <div class="card-header">Manage Category.</div>
+            <div class="card-body text-primary">
+                <p class="card-text">Click the button below to manage Category.</p>
+                <a class="nav-link btn btn-outline-primary" asp-controller="Categories" asp-action="Index">Manage</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card border-primary mb-3">
+            <div class="card-header">Manage Course.</div>
+            <div class="card-body text-primary">
+                <p class="card-text">Click the button below to manage Category.</p>
+                <a class="nav-link btn btn-outline-primary" asp-controller="Courses" asp-action="Index">Manage</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card border-warning mb-3">
+            <div class="card-header">Assign Trainer.</div>
+            <div class="card-body text-warning">
+                <p class="card-text">Click the button below to assign Trainer.</p>
+                <a class="nav-link btn btn-outline-warning" asp-controller="TrainingStaffs" asp-action="ViewTrainer">Assign</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card border-warning mb-3">
+            <div class="card-header">Assign Trainee.</div>
+            <div class="card-body text-warning">
+                <p class="card-text">Click the button below to assign Trainee.</p>
+                <a class="nav-link btn btn-outline-warning" asp-controller="TrainingStaffs" asp-action="ViewTrainee">Assign</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card border-secondary mb-3">
+            <div class="card-header">View Trainer/Trainee in Course.</div>
+            <div class="card-body text-secondary">
+                <form asp-controller="TrainingStaffs" asp-action="SearchCourse" >
+                    <div class="input-group ">
+                        <input class="form-control mr-sm-2 " type="text" placeholder="Search by course " aria-label="Search" name="SearchString">
+                        <input class="form-control mr-sm-2 " type="text" placeholder="Trainer/Trainee " aria-label="Search" name="role">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -44,11 +44,8 @@ namespace AppDevGCD0805.Controllers
         [HttpPost]
         public IActionResult Create(Course course)
         {
-
             _db.Courses.Add(course);
             _db.SaveChanges();
-
-
             return RedirectToAction("Index");
         }
 

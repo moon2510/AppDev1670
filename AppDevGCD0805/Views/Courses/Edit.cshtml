@@ -13,13 +13,14 @@
         <label>Description</label>
         <input type="text" class="form-control" placeholder="Description input" asp-for="Description">
     </div>
-   
-    <div class="form-group">
-      <label>CategoryId</label>
 
-      @Html.DropDownListFor(model => model.CategoryId, ViewBag.CategoryList as SelectList,
-                "Select Category", new { @class = "form-control" })
+    <div class="form-group">
+        <label>CategoryId</label>
+
+        @Html.DropDownListFor(model => model.CategoryId, ViewBag.CategoryList as SelectList,
+                  "Select Category", new { @class = "form-control" })
 
     </div>
     <button type="submit" class="btn btn-outline-info">Edit</button>
+    <center><a class="nav-link btn btn-outline-primary col-3 fas fa-reply" asp-controller="Courses" asp-action="Index">   Back to previous page</a></center>
 </form>

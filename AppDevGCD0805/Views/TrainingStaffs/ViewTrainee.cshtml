@@ -1,0 +1,38 @@
+﻿
+@model IEnumerable<AppDevGCD0805.Models.TraineeProfile>
+
+<h1>Trainee account</h1>
+<main>
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+
+                <th scope="col">Full Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+          <tr>
+
+            <td>@item.User.FullName</td>
+            <td>@item.User.Email</td>
+
+            <td>
+              @Html.ActionLink(" Assign", "AssignTrainee", "TrainingStaffs", new { Id = item.User.Id }, new { @class = "btn btn-outline-info fas fa-chalkboard-teacher" })
+
+              @Html.ActionLink("About Course", "ViewCourseTrainee", "TrainingStaffs", new { Id = item.User.Id }, new { @class = "btn btn-outline-secondary fas fa-chalkboard" })
+            </td>
+          </tr>
+            }
+        </tbody>
+
+    </table>
+
+    <center><a class="nav-link btn btn-outline-primary col-3 fas fa-reply" asp-controller="TrainingStaffs" asp-action="Index">   Back to previous page</a></center>
+</main>
+

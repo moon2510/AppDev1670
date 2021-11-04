@@ -1,6 +1,7 @@
 ﻿using AppDevGCD0805.Data;
 using AppDevGCD0805.Models;
 using AppDevGCD0805.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,8 @@ using System.Threading.Tasks;
 
 namespace AppDevGCD0805.Controllers
 {
-    public class AdminsController : Controller
+   [Authorize(Roles = "Admin")]
+   public class AdminsController : Controller
     {
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -38,10 +40,23 @@ namespace AppDevGCD0805.Controllers
         [HttpPost]
         public IActionResult CreateStaff(User user)
         {
+            if (!ModelState.IsValid) return View(user);
+            
+            if (_userManager.FindByEmailAsync(user.Email).GetAwaiter().GetResult()!=null)
+            {
+                TempData["Danger"] = "The email address is already registered";
+                return View(new User());
+            }
+            user.UserName = user.Email;
+            
             IdentityResult result = _userManager.CreateAsync(user, user.PasswordHash).GetAwaiter().GetResult();
-            IdentityResult roleReulst = _userManager.AddToRoleAsync(user, "Staff").GetAwaiter().GetResult();
+
+            if (result.Succeeded)
+            {
+               _userManager.AddToRoleAsync(user, "Staff").GetAwaiter().GetResult();
+            }
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("ManageStaff");
         }
         public IActionResult ManageStaff()
         {
@@ -72,6 +87,10 @@ namespace AppDevGCD0805.Controllers
         [HttpPost]
         public ActionResult EditStaff(User user)
         {
+            if (!ModelState.IsValid) return View(user);
+
+            
+            if (!ModelState.IsValid) return View(user);
             var staffinDb = _db.Users.SingleOrDefault(item => item.Id == user.Id);
             staffinDb.FullName = user.FullName;
             staffinDb.Address = user.Address;
@@ -91,10 +110,22 @@ namespace AppDevGCD0805.Controllers
         [HttpPost]
         public IActionResult CreateTrainer(TrainerProfile trainerProfile)
         {
-            var user = trainerProfile.User;
-            IdentityResult result = _userManager.CreateAsync(user, user.PasswordHash).GetAwaiter().GetResult();
-            _userManager.AddToRoleAsync(user, "Trainer");
 
+            if (!ModelState.IsValid) return View(trainerProfile);
+
+            if (_userManager.FindByEmailAsync(trainerProfile.User.Email).GetAwaiter().GetResult() != null)
+            {
+                TempData["Danger"] = "The email address is already registered";
+                return View(new TrainerProfile());
+            }
+            var user = trainerProfile.User;
+            user.UserName = user.Email;
+            IdentityResult result = _userManager.CreateAsync(user, user.PasswordHash).GetAwaiter().GetResult();
+            
+            if (result.Succeeded)
+            {
+               _userManager.AddToRoleAsync(user, "Trainer").GetAwaiter().GetResult();
+            }
             var trainer = new TrainerProfile();
             trainer.UserId = user.Id;
             trainer.Specialty = trainerProfile.Specialty;

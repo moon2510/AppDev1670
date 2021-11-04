@@ -1,0 +1,39 @@
+﻿@model IEnumerable<AppDevGCD0805.Models.AssignTrainerCourse>
+
+<h1>Trainer in course  </h1>
+
+<main>
+    <form asp-controller="TrainingStaffs" asp-action="SearchCourse" method="post">
+        <div class="input-group col-5 ">
+            <input class="form-control mr-sm-2 " type="text" placeholder="Search by course " aria-label="Search" name="SearchString">
+            <input class="form-control mr-sm-2 " type="text" placeholder="Trainer/Trainee " aria-label="Search" name="role">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </form>
+    <br />
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+
+                <th scope="col">Trainer</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.TrainerProfile.User.FullName</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+    <br />
+    <br />
+    <center><a class="nav-link btn btn-outline-primary col-3 fas fa-reply" asp-controller="TrainingStaffs" asp-action="Index">   Back to previous page</a></center>
+</main>
